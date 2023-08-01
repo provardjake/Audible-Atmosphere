@@ -7,6 +7,7 @@ var deezerRequestURLPrefix = "https://cors.iamnd.eu.org/?url=";
 
 
 
+
 function fetchData(requestLatLong){
     fetch(requestLatLong)
     .then(function (response){
@@ -31,6 +32,7 @@ function fetchData(requestWeatherUrl){
 }
 
 fetchData(requestWeatherUrl);
+
 
 
 function generatePlaylist(){
