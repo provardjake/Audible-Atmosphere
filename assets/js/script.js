@@ -47,14 +47,41 @@ function getMusicType(weatherConditionId){
     const atmosphere = [701, 711, 721, 731, 741, 751, 761, 762, 771, 781];
     const clear = [800];
     const clouds = [801, 802, 803, 804];
-    var genreArray = ["rock", "metal", "pop", "hip-hop", "edm", "latin", "country", "classical", "punk", "jazz", "blues"] ;
+    const genreArray = ["rock", "metal", "pop", "hip-hop", "edm", "country", "classical", "punk", "jazz", "blues", "indie", "lo-fi"] ;
+
 
     if(weatherConditionId === thunderstorm){
+        genreArray[0];
+        genreArray[1];
+        genreArray[4];
 
+
+    }
+    if(weatherConditionId === drizzle){
+        genreArray[8];
+        genreArray[9];
+    }
+    if(weatherConditionId === rain){
+        genreArray[6];
+        genreArray[9];
     }
     if(weatherConditionId === clear){
         genreArray[2];
+        genreArray[3];
     }
+    if(weatherConditionId === atmosphere){
+        genreArray[10];
+        genreArray[7];
+    }
+    if(weatherConditionId === snow){
+        genreArray[6];
+        genreArray[11];
+    }
+    if(weatherConditionId === clouds){
+        genreArray[10];
+        genreArray[3];
+    }
+
 }
 
 function getWeatherTest(){
