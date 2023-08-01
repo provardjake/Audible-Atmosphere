@@ -65,5 +65,13 @@ p {
 h2 {
   font-size: 30px;
   color: black;
-  margin-bottom: 10px;
+
 }
+
+.card {
+  justify-content: center;
+  width: 750px;
+  height: 600px;
+
+}
+
