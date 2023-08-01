@@ -40,3 +40,10 @@ h1 {
 h2 {
   color: black;
 }
+
+.card {
+  justify-content: center;
+  width: 750px;
+  height: 600px;
+
+}
