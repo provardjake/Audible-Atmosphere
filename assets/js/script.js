@@ -1,5 +1,36 @@
+var requestLatLong = 'http://api.openweathermap.org/geo/1.0/direct?q=Sandy,UT,&limit=100&appid=6314948569672463577f027ffc3ab6b1'
+var requestWeatherUrl = 'https://api.openweathermap.org/data/2.5/weather?lat=38.0142&lon=84.6165&appid=6314948569672463577f027ffc3ab6b1';
 var jakeAPIKeyOpenWeather = "0ba3133cb694a7de240bc9e5f4fceed2";
 var deezerRequestURLPrefix = "https://cors.iamnd.eu.org/?url=";
+
+
+
+
+
+function fetchData(requestLatLong){
+    fetch(requestLatLong)
+    .then(function (response){
+        return response.json();
+    })
+    .then(function(data){
+    console.log(data)
+    });
+  }
+  
+  fetchData(requestLatLong);
+  
+
+function fetchData(requestWeatherUrl){
+  fetch(requestWeatherUrl)
+  .then(function (response){
+      return response.json();
+  })
+  .then(function(data){
+  console.log(data)
+  });
+}
+
+fetchData(requestWeatherUrl);
 
 
 function generatePlaylist(){
