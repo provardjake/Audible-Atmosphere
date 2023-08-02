@@ -53,6 +53,7 @@ function getCityName(userInput){
                     cityLatitude = cityArray[cityArrayIndex].lat;
                     cityLongitude = cityArray[cityArrayIndex].lon;
                     getWeather(cityLatitude, cityLongitude);
+                    console.log(cityLatitude + " " + cityLongitude);
             }
         })
     })
@@ -81,6 +82,11 @@ function getWeather(cityLatitude, cityLongitude){
         return response.json();
     })
     .then(function(data){
+        console.log(data);
+        console.log(data.weather[0].id);
+        localStorage.setItem("lat",cityLatitude);
+        localStorage.setItem("lon",cityLongitude);
+        //localStorage.setItem("City",data.weather[0].)
         getMusicType(data.weather[0].id);
     })
 }
