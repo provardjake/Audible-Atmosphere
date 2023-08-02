@@ -5,60 +5,50 @@
 }
 
 
+
 body {
-  height:900px;
-  /* background-color: #5b2035; */
+
 
 }
 
 .navbar {
-  display: flex;
   box-shadow: 0px .008px 10px .008px rgb(206, 206, 206);
-
 }
 
 .columns {
-  margin-top: 30px;
   text-align: center;
 }
 
 .col-2 {
-  margin-top: 50px;
+
 }
 
 
 h1 {
-  font-size: 50px;
-  margin-top: 125px;
   color: black;
 }
 
 span {
-  color: orange;
+  color: rgb(255, 165, 0);
 }
 
 
 p {
-  margin-bottom: 20px;
+
 }
 
 .input {
-  margin-top: 8px;
-  margin-bottom: 20px;
+
 }
 
 .button {
-  margin-top: 10px;
-  padding: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
   background-color: orange;
   color: black;
 }
 
 .box {
-  margin: 20px;
-  height: 700px;
+
+  /* height: 700px; */
 }
 
 
@@ -68,10 +58,21 @@ h2 {
 
 }
 
-.card {
-  justify-content: center;
-  width: 750px;
-  height: 600px;
+@media screen and (max-width:750px) {
+  .col-1, .col-3 {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+  }
+}
 
+@media screen and (max-width:750px) {
+  .columns {
+    display: flex;
+    flex-direction: column;
+  }
+  #a{order:2;}
+  #a{order:1;}
+  #a{order:3;}
 }
 

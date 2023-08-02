@@ -38,8 +38,8 @@
     </nav>
 
 
-      <div class="columns">
-        <div class="column">
+      <div id="parent" class="columns is-mobile">
+        <div class="column col-1" id="a">
             <div>
                 <div class="box">
                     <h2>Saved Playlists</h2>
@@ -47,10 +47,9 @@
             </div>
         </div>
         
-        <div class="column col-2">
+        <div class="column col-2" id="b">
          <h1><span>Audible </span>Atmosphere<span>.</span></h1>
          <div>
-          <!-- <h2>Hear The Weather!</h2> -->
           <h2>Turn The Weather Into Music!</h2>
          </div>
          <p>Generate a random music playlist based on the weather in your area!</p>
@@ -63,7 +62,10 @@
         
 
 
-        <div class="column">
+
+
+
+        <div class="column col-3" id="c">
           <div>
             <div class="box">
                 <h2>Recent Locations</h2>
@@ -71,6 +73,13 @@
             </div>
         </div>
       </div>
+
+
+
+
+
+
+
 
       <script src="assets/js/script.js"></script>
   </body>
