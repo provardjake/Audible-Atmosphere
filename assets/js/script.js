@@ -84,9 +84,15 @@ function getWeather(cityLatitude, cityLongitude){
     .then(function(data){
         console.log(data);
         console.log(data.weather[0].id);
-        localStorage.setItem("lat",cityLatitude);
-        localStorage.setItem("lon",cityLongitude);
-        //localStorage.setItem("City",data.weather[0].)
+        var recentLocations = {
+            lat: cityLatitude,
+            lon: cityLongitude,
+            city: data.name,
+            country: data.sys.country
+        };
+        localStorage.setItem("citySearch",JSON.stringify(recentLocations));
+
+        console.log(recentLocations);
         getMusicType(data.weather[0].id);
     })
 }
