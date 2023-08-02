@@ -107,10 +107,19 @@ function getWeatherId(){
 
 
 
-function generatePlaylist(){
-    return;
+function generatePlaylist(genreOne, genreTwo, genreThree){
+    if(genreOne != undefined && genreTwo != undefined && genreThree === undefined){
+        
+    }
+    if(genreOne != undefined && genreTwo != undefined && genreThree != undefined){
+
+    }
+    else{
+
+    }
 }
 
+// this function takes in the id of the weather conditions and then applies a music genre based off that id. 
 function getMusicType(weatherConditionId){
     const thunderstorm = [200, 201, 202, 210, 211, 212, 221, 230, 231, 232];
     const drizzle = [300, 302, 310, 311, 312, 313, 314, 321];
@@ -119,28 +128,32 @@ function getMusicType(weatherConditionId){
     const atmosphere = [701, 711, 721, 731, 741, 751, 761, 762, 771, 781];
     const clear = [800];
     const clouds = [801, 802, 803, 804];
-    var genreArray = ["rock", "metal", "pop", "hip-hop", "edm", "latin", "country", "classical", "punk", "jazz", "blues"] ;
+    const genreArray = ["Rock", "Metal", "Pop", "Rap/Hip Hop", "Electro", "Country", "Classical", "Dance", "Jazz", "Blues", "Alternative", "Soul & Funk"] ;
+
 
     if(weatherConditionId === thunderstorm){
-
+        generatePlaylist(genreArray[0], genreArray[1], genreArray[4]);
+    }
+    if(weatherConditionId === drizzle){
+        generatePlaylist(genreArray[8], genreArray[9]);
+    }
+    if(weatherConditionId === rain){
+        generatePlaylist(genreArray[6], genreArray[9]);
     }
     if(weatherConditionId === clear){
-        genreArray[2];
+        generatePlaylist(genreArray[2], genreArray[3]);
     }
+    if(weatherConditionId === atmosphere){
+        generatePlaylist(genreArray[10], genreArray[7]);
+    }
+    if(weatherConditionId === snow){
+        generatePlaylist(genreArray[6], genreArray[11]);
+    }
+    if(weatherConditionId === clouds){
+        generatePlaylist(genreArray[10], genreArray[2]);
+    }
+    else{
+        generatePlaylist(genreArray[2]);
+    }
+
 }
-
-function getWeatherTest(){
-    var lat = 46.9481;
-    var lon = 7.4474;
-    var openWeatherRequestURL = "https://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&appid="+jakeAPIKeyOpenWeather;
-
-    fetch(openWeatherRequestURL)
-    .then(function(response){
-        return response.json();
-    })
-    .then(function(data){
-        console.log(data);
-    })
-}
-
-getWeatherTest();
