@@ -5,7 +5,7 @@ var deezerRequestURLPrefix = "https://cors.iamnd.eu.org/?url=";
 var searchButton = document.querySelector("#generate-button");
 var cityList = document.querySelector("#city-list");
 
-
+//listen for input of city name or zip code
 searchButton.addEventListener("click", function(event){
     event.preventDefault();
     var userInput = document.querySelector("#user-input").value;
@@ -18,10 +18,7 @@ searchButton.addEventListener("click", function(event){
     }
 });
 
-
-
-
-
+//get latitude and longitude from the geo api when user inputs city. 
 function getCityName(userInput){
     var requestUrl = "http://api.openweathermap.org/geo/1.0/direct?q="+userInput+"&limit=5&appid="+jakeAPIKeyOpenWeather;
     var cityLongitude;
@@ -31,22 +28,23 @@ function getCityName(userInput){
     .then(function(response){
         return response.json();
     })
-        .then(function(data){
-            for(var i = 0; i < data.length; i++){
-                var cityListItem = document.createElement("button");
-                cityListItem.setAttribute("type", "button");
-                cityListItem.setAttribute("data-array-index", i);
-                cityListItem.setAttribute("class", "list-group-item list-group-item-action list-group-item-secondary"); // change classes.  They are bootstrap
-                if(data[i].state === undefined || data[i].country !== "US"){
-                    cityListItem.textContent = data[i].name+", "+data[i].country;
-                }
-                else{
-                    cityListItem.textContent = data[i].name+", "+data[i].state;
-                }
+    .then(function(data){
+        for(var i = 0; i < data.length; i++){
+            var cityListItem = document.createElement("button");
+            cityListItem.setAttribute("type", "button");
+            cityListItem.setAttribute("data-array-index", i);
+            cityListItem.setAttribute("class", "list-group-item list-group-item-action list-group-item-secondary"); 
+            cityListItem.setAttribute("style", "display:block;");
+            if(data[i].state === undefined || data[i].country !== "US"){
+                cityListItem.textContent = data[i].name+", "+data[i].country;
+            }
+            else{
+                cityListItem.textContent = data[i].name+", "+data[i].state;
+            }
                 cityArray.push(data[i]);
                 cityList.appendChild(cityListItem);
             }
-            cityList.style.display = "flex";
+            cityList.style.display = "block";
             document.addEventListener("click", function(event){
                 event.preventDefault();
                 const target = event.target.closest(".list-group-item");
@@ -55,11 +53,11 @@ function getCityName(userInput){
                     cityLatitude = cityArray[cityArrayIndex].lat;
                     cityLongitude = cityArray[cityArrayIndex].lon;
                     getWeather(cityLatitude, cityLongitude);
-                }
-            })
+            }
         })
-    }
-    
+    })
+}
+//If user inputs only numbers use the geo api to get latitude and longitude from zip code.     
 function getZipCode(userInput){
         var requestUrl = "http://api.openweathermap.org/geo/1.0/zip?zip="+userInput+",US&appid="+jakeAPIKeyOpenWeather;
         var cityLongitude;
@@ -75,37 +73,18 @@ function getZipCode(userInput){
         })
     }
 
-
-// function getCoordinates(requestLatLong){
-//     fetch(requestLatLong)
-//     .then(function (response){
-//         return response.json();
-//     })
-//     .then(function(data){
-//     console.log(data)
-//     });
-//   }
-  
-//   getCoordinates(requestLatLong);
-  
-
-function getWeather(requestWeatherUrl){
-  fetch(requestWeatherUrl)
-  .then(function (response){
-      return response.json();
-  })
-  .then(function(data){
-  console.log(data)
-  });
+function getWeather(cityLatitude, cityLongitude){
+    var openWeatherRequestURL = "https://api.openweathermap.org/data/2.5/weather?lat="+cityLatitude+"&lon="+cityLongitude+"&appid="+jakeAPIKeyOpenWeather+"&units=imperial";
+    
+    fetch(openWeatherRequestURL)
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(data){
+        getMusicType(data.weather[0].id);
+    })
 }
-
-getWeather(requestWeatherUrl);
-
-function getWeatherId(){
-    return;
-}
-
-
+    
 
 function generatePlaylist(){
     return;
@@ -129,18 +108,4 @@ function getMusicType(weatherConditionId){
     }
 }
 
-function getWeatherTest(){
-    var lat = 46.9481;
-    var lon = 7.4474;
-    var openWeatherRequestURL = "https://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&appid="+jakeAPIKeyOpenWeather;
 
-    fetch(openWeatherRequestURL)
-    .then(function(response){
-        return response.json();
-    })
-    .then(function(data){
-        console.log(data);
-    })
-}
-
-getWeatherTest();
