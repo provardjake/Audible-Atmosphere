@@ -69,9 +69,29 @@ h2 {
 
 }
 
-.card {
-  justify-content: center;
-  width: 750px;
-  height: 600px;
+#user-input {
+  padding: 20px;
+}
 
+
+@media screen and (max-width:767px){
+  #parent{
+    display:flex;
+    flex-flow: column;
+  }
+  #a {
+    order:2;
+    display: flex;
+    flex-flow: row;
+  }
+  #c {
+    order:2;
+    display: flex;
+    flex-flow: row;
+  }
+  
+
+
+  
+  
 }

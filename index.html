@@ -37,39 +37,39 @@
         </div>
     </nav>
 
-
-      <div class="columns is-desktop">
-        <div class="column">
+      <div class="columns" id="parent">
+        <!-- Column A -->
+        <div class="column" id="a">
             <div>
-                <div class="box">
+                <div class="box ">
                     <h2>Saved Playlists</h2>
                 </div>
             </div>
         </div>
-        
-        <div class="column col-2">
-         <h1><span>Audible </span>Atmosphere<span>.</span></h1>
-         <div>
-          <!-- <h2>Hear The Weather!</h2> -->
-          <h2>Turn The Weather Into Music!</h2>
-         </div>
-         <p>Generate a random music playlist based on the weather in your area!</p>
-            <div> 
-                <input class="input" type="text" id = "user-input" placeholder="Enter Zip Code, or Address">
-           </div>
-            <button class="button" type="button" id="generate-button">Generate!</button> 
-            <div id="city-list" style="display: none;"></div>
-        </div>
-      </div>  
-
-      <div class="columns is-desktop">  
-        <div class="column">
+        <!-- Column B -->
+          <div class="column col-2" id="b">
+          <h1><span>Audible </span>Atmosphere<span>.</span></h1>
           <div>
-            <div class="box">
-                <h2>Recent Locations</h2>
+            <!-- <h2>Hear The Weather!</h2> -->
+            <h2>Turn The Weather Into Music!</h2>
+          </div>
+          <p>Generate a random music playlist based on the weather in your area!</p>
+              <div> 
+                  <input class="input" type="text" id="user-input" placeholder="Enter Zip Code, or Address">
             </div>
-            </div>
-        </div>
+              <button class="button" type="button" id="generate-button">Generate!</button> 
+              <div id="city-list" style="display: none;"></div>
+          </div>
+          <!-- Column C-->
+          <div class="column col-3" id="c">
+            <div>
+              <div class="box">
+                  <h2>Recent Locations</h2>
+              </div>
+              </div>
+          </div>
+
+        </div>  
       </div>
 
       <script src="assets/js/script.js"></script>
