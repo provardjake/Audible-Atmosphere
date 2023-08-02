@@ -8,7 +8,9 @@
         <title>Audible Atmosphere | Playlist</title>
     </head>
     <body>
+
       <!-- ////////////////////////// Nav Bar /////////////////////////////////////// -->
+
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
               <a class="navbar-item" href="https://bulma.io">
@@ -69,12 +71,18 @@
               </div>
             </div>
         </nav>  
-        <!-- ////////////////////////// End Nav Bar /////////////////////////////////////// -->     
 
+        <!-- ////////////////////////// End Nav Bar /////////////////////////////////////// -->     
         
-        <main>
-            <div class="container" id="playlist-box">
+        <main class="columns is-centered">
+            <div class="container">
+
                 <h1 class="has-text-centered is-size-4">Current Weather in (location)</h1>
+                <div class="box column is-centered" id="weather-box">
+                  <p>
+                    Weather information will be displayed here.
+                  </p>
+                </div>
                 <h2 class="has-text-centered is-size-4">Here's your playlist!</h2>
 
                 <div class="container has-text-centered">
@@ -83,9 +91,10 @@
                   <button class="button" type="button">Regenerate</button>
                 </div>
 
-                <div class="box">
-                    <ul></ul>
-                    <div></div>
+                <div class="box column is-centered"  id="playlist-box">
+                    <ul>
+                      Playlist information will be displayed here.
+                    </ul>
                 </div>
 
                 
