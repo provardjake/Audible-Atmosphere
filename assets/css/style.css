@@ -62,6 +62,14 @@ p {
   height: 700px;
 }
 
+.column {
+  max-width: 500px;
+  max-height: 500px;
+}
+
+#playlist-box {
+  max-width: 600px;
+}
 
 h2 {
   font-size: 30px;
@@ -81,17 +89,6 @@ h2 {
   }
   #a {
     order:2;
-    display: flex;
-    flex-flow: row;
-  }
-  #c {
-    order:2;
-    display: flex;
-    flex-flow: row;
-  }
-  
 
-
-  
-  
+  } 
 }
