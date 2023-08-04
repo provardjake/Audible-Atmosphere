@@ -4,6 +4,13 @@ var jakeAPIKeyOpenWeather = "0ba3133cb694a7de240bc9e5f4fceed2";
 var deezerRequestURLPrefix = "https://cors.iamnd.eu.org/?url=";
 var searchButton = document.querySelector("#generate-button");
 var cityList = document.querySelector("#city-list");
+var citySearch = [];
+var searchLat1 = [];
+var searchLon1 = [];
+var searchCity1 = [];
+var searchCountry1 = [];
+
+
 
 //listen for input of city name or zip code
 searchButton.addEventListener("click", function(event){
@@ -53,7 +60,7 @@ function getCityName(userInput){
                     cityLatitude = cityArray[cityArrayIndex].lat;
                     cityLongitude = cityArray[cityArrayIndex].lon;
                     getWeather(cityLatitude, cityLongitude);
-                    console.log(cityLatitude + " " + cityLongitude);
+                    //console.log(cityLatitude + " " + cityLongitude);
             }
         })
     })
@@ -82,21 +89,69 @@ function getWeather(cityLatitude, cityLongitude){
         return response.json();
     })
     .then(function(data){
-        console.log(data);
-        console.log(data.weather[0].id);
-        var recentLocations = {
-            lat: cityLatitude,
-            lon: cityLongitude,
-            city: data.name,
-            country: data.sys.country
-        };
-        localStorage.setItem("citySearch",JSON.stringify(recentLocations));
+        var searchLat = [cityLatitude];
+        var searchLon = [cityLongitude];
+        var searchCity = [data.name];
+        var searchCountry = [data.sys.country];
+        console.log(searchCountry);
 
-        console.log(recentLocations);
+
+        localStorage.setItem("latitudeSave",JSON.stringify(searchLat));
+        localStorage.setItem("longitudeSave",JSON.stringify(searchLon));
+        localStorage.setItem("citySave",JSON.stringify(searchCity));
+        localStorage.setItem("countrySave",JSON.stringify(searchCountry));
+
+        searchLat1.push(searchLat);
+        searchLon1.push(searchLon);
+        searchCity1.push(searchCity);
+        searchCountry1.push(searchCountry);
+      
+        
+        console.log(searchLat);
+        console.log(searchLon);
+        console.log(searchCity);
+        console.log(searchCountry);
+
+
+        localStorage.setItem("latitudeSave",JSON.stringify(searchLat1));
+        localStorage.setItem("longitudeSave",JSON.stringify(searchLon1));
+        localStorage.setItem("citySave",JSON.stringify(searchCity1));
+        localStorage.setItem("countrySave",JSON.stringify(searchCountry1));
+
+       // Retrieve the object from storage to add a new student
+       // var retrievedSearches = localStorage.getItem("searches");
+        //var stored = JSON.parse(retrievedSearches);
+
+        //stored.push(recentLocations);
+        //localStorage.setItem("searches", JSON.stringify(stored));
+
+
+
+        //citySearch.push(recentLocations);
+        //console.log(citySearch);
+        //citySearch = JSON.parse(localStorage.getItem("citySearch") || "[]");
+        //console.log(citySearch);
+        //citySearch.push(recentLocations);
+        //console.log(citySearch);
+        //localStorage.setItem("citySearch",JSON.stringify(citySearch));
+
+        //for(var i = 0; i < recentLocations.length; i++){
+        //    var searchInput = document.createElement("button");
+        //    searchInput.setAttribute("type", "button");
+        //    searchInput.setAttribute("data-array-index", i);
+        //    searchInput.setAttribute("class", "list-group-item list-group-item-action list-group-item-secondary"); 
+        //   searchInput.setAttribute("style", "display:block;");
+        //}
+
+       // console.log(recentLocations);
         getMusicType(data.weather[0].id);
     })
 }
-    
+
+
+
+
+
 
 
 function generatePlaylist(genreOne, genreTwo, genreThree){
