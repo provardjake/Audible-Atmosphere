@@ -58,8 +58,8 @@ function getCityName(userInput){
                     getWeather(cityLatitude, cityLongitude);
                 }
             })
-        })
-    }
+        });
+}
     
 
 function getZipCode(userInput){
@@ -78,57 +78,57 @@ function getZipCode(userInput){
 }
 
 function getWeather(cityLatitude, cityLongitude){
-var openWeatherRequestURL = "https://api.openweathermap.org/data/2.5/weather?lat="+cityLatitude+"&lon="+cityLongitude+"&appid="+jakeAPIKeyOpenWeather+"&units=imperial";
+    var openWeatherRequestURL = "https://api.openweathermap.org/data/2.5/weather?lat="+cityLatitude+"&lon="+cityLongitude+"&appid="+jakeAPIKeyOpenWeather+"&units=imperial";
 
-fetch(openWeatherRequestURL)
-.then(function(response){
-    return response.json();
-})
-.then(function(data){
-    var searchLat = [cityLatitude];
-    var searchLon = [cityLongitude];
-    var searchCity = [data.name];
-    var searchCountry = [data.sys.country];
-    console.log(searchCountry);
+    fetch(openWeatherRequestURL)
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(data){
+        var searchLat = [cityLatitude];
+        var searchLon = [cityLongitude];
+        var searchCity = [data.name];
+        var searchCountry = [data.sys.country];
+        console.log(searchCountry);
 
 
-    localStorage.setItem("latitudeSave",JSON.stringify(searchLat));
-    localStorage.setItem("longitudeSave",JSON.stringify(searchLon));
-    localStorage.setItem("citySave",JSON.stringify(searchCity));
-    localStorage.setItem("countrySave",JSON.stringify(searchCountry));
+        localStorage.setItem("latitudeSave",JSON.stringify(searchLat));
+        localStorage.setItem("longitudeSave",JSON.stringify(searchLon));
+        localStorage.setItem("citySave",JSON.stringify(searchCity));
+        localStorage.setItem("countrySave",JSON.stringify(searchCountry));
 
-    searchLat1.push(searchLat);
-    searchLon1.push(searchLon);
-    searchCity1.push(searchCity);
-    searchCountry1.push(searchCountry);
+        searchLat1.push(searchLat);
+        searchLon1.push(searchLon);
+        searchCity1.push(searchCity);
+        searchCountry1.push(searchCountry);
   
     
-    console.log(searchLat);
-    console.log(searchLon);
-    console.log(searchCity);
-    console.log(searchCountry);
+        console.log(searchLat);
+        console.log(searchLon);
+        console.log(searchCity);
+        console.log(searchCountry);
 
 
-    localStorage.setItem("latitudeSave",JSON.stringify(searchLat1));
-    localStorage.setItem("longitudeSave",JSON.stringify(searchLon1));
-    localStorage.setItem("citySave",JSON.stringify(searchCity1));
-    localStorage.setItem("countrySave",JSON.stringify(searchCountry1));
+        localStorage.setItem("latitudeSave",JSON.stringify(searchLat1));
+        localStorage.setItem("longitudeSave",JSON.stringify(searchLon1));
+        localStorage.setItem("citySave",JSON.stringify(searchCity1));
+        localStorage.setItem("countrySave",JSON.stringify(searchCountry1));
 
-    getMusicType(data.weather[0].id);
-})
+        getMusicType(data.weather[0].id);
+        console.log(data.weather[0].id);
+    })
 }
-
 
 function getRandomInteger(min, max) {
     return Math.floor(Math.random() * (max - min) ) + min;
-  }
+}
 
 function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
     var requestURLGenre = "https://api.deezer.com/genre";
     var requestURLArtist = "https://api.deezer.com/artist";
     
     if(genreOneId != undefined && genreTwoId == undefined && genreThreeId == undefined){
-        var playlist = [];
+        var playlist;
         fetch(deezerRequestURLPrefix+requestURLGenre+"/"+genreOneId+"/artists")
         .then(function (response){
             return response.json();
@@ -143,13 +143,15 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
                 })
                 .then(function(data){
                     var randomSong = data.data[getRandomInteger(0, data.data.length)];
-                    playlist.push(randomSong.title_short+" by "+randomSong.artist.name);
+                    playlist = randomSong.title_short+" by "+randomSong.artist.name;
+                    displayPlaylist(playlist);
                 });
             }
         });
+        displayPlaylist(playlist);
     }
     if(genreOneId != undefined && genreTwoId != undefined && genreThreeId == undefined){
-        var playlist = [];
+        var playlist;
 
         for(var i = 0; i < 10; i++){
             var genreArray = [genreOneId, genreTwoId];
@@ -167,15 +169,16 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
                 })
                 .then(function(data){
                     var randomSong = data.data[getRandomInteger(0, data.data.length)];
-                    playlist.push(randomSong.title_short+" by "+randomSong.artist.name);
-                    console.log(playlist);
+                    playlist = randomSong.title_short+" by "+randomSong.artist.name;
+                    displayPlaylist(playlist);
                 });
             });
         }
+        displayPlaylist(playlist);
     }
 
     if(genreOneId != undefined && genreTwoId != undefined && genreThreeId != undefined){
-        var playlist = [];
+        var playlist;
 
         for(var i = 0; i < 10; i++){
             var genreArray = [genreOneId, genreTwoId, genreThreeId];
@@ -193,17 +196,26 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
                 })
                 .then(function(data){
                     var randomSong = data.data[getRandomInteger(0, data.data.length)];
-                    playlist.push(randomSong.title_short+" by "+randomSong.artist.name);
-                    console.log(playlist);
+                    playlist = randomSong.title_short+" by "+randomSong.artist.name;
+                    displayPlaylist(playlist);
                 });
             });
         }
+        
     }   
+}
+
+function displayPlaylist(playlist){
+    var playListUl = document.getElementById("playlist");
+
+    var playlistItem = document.createElement("li");
+    playlistItem.textContent = playlist;
+    playListUl.appendChild(playlistItem);
 
  
 }
 
-generatePlaylist(152, 464, 106);
+//generatePlaylist(152, 464, 106);
 
 // this function takes in the id of the weather conditions and then applies a music genre based off that id. 
 function getMusicType(weatherConditionId){
@@ -243,5 +255,4 @@ function getMusicType(weatherConditionId){
     else{
         generatePlaylist(genreArray[2]);
     }
-
 }
