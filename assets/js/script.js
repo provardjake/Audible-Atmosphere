@@ -4,6 +4,11 @@ var jakeAPIKeyOpenWeather = "0ba3133cb694a7de240bc9e5f4fceed2";
 var deezerRequestURLPrefix = "https://cors.iamnd.eu.org/?url=";
 var searchButton = document.querySelector("#generate-button");
 var cityList = document.querySelector("#city-list");
+var citySearch = [];
+var searchLat1 = [];
+var searchLon1 = [];
+var searchCity1 = [];
+var searchCountry1 = [];
 
 
 document.getElementById("generate-button")?.addEventListener("click", function(event){
@@ -17,10 +22,6 @@ document.getElementById("generate-button")?.addEventListener("click", function(e
         getZipCode(userInput);
     }
 });
-
-
-
-
 
 function getCityName(userInput){
     var requestUrl = "http://api.openweathermap.org/geo/1.0/direct?q="+userInput+"&limit=5&appid="+jakeAPIKeyOpenWeather;
