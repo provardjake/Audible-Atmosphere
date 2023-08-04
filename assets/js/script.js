@@ -173,6 +173,7 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
             });
         }
     }
+}
 
     if(genreOneId != undefined && genreTwoId != undefined && genreThreeId != undefined){
         var playlist = [];
@@ -202,6 +203,7 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
 
  
 }
+
 
 generatePlaylist(152, 464, 106);
 
