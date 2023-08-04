@@ -3,13 +3,16 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hello Bulma!</title>
+    <title>Audible Atmosphere</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Agdasima&family=Josefin+Sans&family=Open+Sans:wght@300&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
   </head>
   <body>
 
-    <!-- //////////// Nav Bar //////////////////// -->
+
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
           <a class="navbar-item" href="https://bulma.io">
@@ -30,39 +33,40 @@
             </a>
       
             <a class="navbar-item">
-              Documentation
+              GitHub Repo
             </a>
             </div>
           </div>
         </div>
     </nav>
-    <!-- //////////// End Nav Bar //////////////// -->
 
-    <main>
-      <div class="columns" id="parent">
-        <!-- Column A -->
-        <div class="column" id="a">
-          <div class="box">
-              <h2>Saved Playlists</h2>
-          </div>            
+
+      <div class="columns">
+        <div class="column">
+            <div>
+                <div class="box">
+                    <h2>Saved Playlists</h2>
+                </div>
+            </div>
         </div>
-        <!-- Column B -->
-        <div class="column col-2" id="b">
-          <h1><span>Audible </span>Atmosphere<span>.</span></h1>
-          <div>
-            <h2>Turn The Weather Into Music!</h2>
-          </div>
-            <p>
-              Generate a random music playlist based on the weather in your area!
-            </p>
-          <div> 
-            <input class="input" type="text" id="user-input" placeholder="Enter Zip Code, or Address">
-          </div>
+        
+        <div class="column col-2">
+         <h1><span>Audible </span>Atmosphere<span>.</span></h1>
+         <div>
+          <!-- <h2>Hear The Weather!</h2> -->
+          <h2>Turn The Weather Into Music!</h2>
+         </div>
+         <p>Generate a random music playlist based on the weather in your area!</p>
+            <div> 
+                <input class="input" type="text" id = "user-input" placeholder="Enter Zip Code, or Address">
+           </div>
             <button class="button" type="button" id="generate-button">Generate!</button> 
             <div id="city-list" style="display: none;"></div>
         </div>
-        <!-- Column C -->
-        <div class="column col-3" id="c">
+        
+
+
+        <div class="column">
           <div>
             <div class="box">
                 <h2>Recent Locations</h2>
@@ -70,8 +74,7 @@
             </div>
         </div>
       </div>
-    </main>
 
-      <script src="assets/js/script.js"></script>
-  </body>
+  <script src="assets/js/script.js"></script>
+</body>
 </html>
