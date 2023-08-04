@@ -207,7 +207,7 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
             });
         }
     }
-
+}
 generatePlaylist(152, 464, 106);
 
 // this function takes in the id of the weather conditions and then applies a music genre based off that id. 
