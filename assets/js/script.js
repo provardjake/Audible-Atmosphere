@@ -4,6 +4,12 @@ var jakeAPIKeyOpenWeather = "0ba3133cb694a7de240bc9e5f4fceed2";
 var deezerRequestURLPrefix = "https://cors.iamnd.eu.org/?url=";
 var searchButton = document.querySelector("#generate-button");
 var cityList = document.querySelector("#city-list");
+var citySearch = [];
+var searchLat1 = [];
+var searchLon1 = [];
+var searchCity1 = [];
+var searchCountry1 = [];
+
 
 
 document.getElementById("generate-button")?.addEventListener("click", function(event){
@@ -104,6 +110,10 @@ getWeather(requestWeatherUrl);
 function getWeatherId(){
     return;
 }
+
+
+
+
 
 function getRandomInteger(min, max) {
     return Math.floor(Math.random() * (max - min) ) + min;
