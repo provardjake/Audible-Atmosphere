@@ -4,12 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hello Bulma!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Agdasima&family=Josefin+Sans&family=Open+Sans:wght@300&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
   </head>
   <body>
 
-
+<!-- start navigation -->
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
           <a class="navbar-item" href="https://bulma.io">
@@ -30,14 +33,18 @@
             </a>
       
             <a class="navbar-item">
-              Documentation
+              GitHub Repo
             </a>
             </div>
           </div>
         </div>
     </nav>
+<!-- end nav -->
 
 
+<div class="main-content">
+<!-- Start Columns -->
+    <!-- start col 1 -->
       <div id="parent" class="columns is-mobile">
         <div class="column col-1" id="a">
             <div>
@@ -46,25 +53,24 @@
                 </div>
             </div>
         </div>
-        
-        <div class="column col-2" id="b">
-         <h1><span>Audible </span>Atmosphere<span>.</span></h1>
-         <div>
-          <h2>Turn The Weather Into Music!</h2>
-         </div>
-         <p>Generate a random music playlist based on the weather in your area!</p>
-            <div> 
-                <input class="input" type="text" id = "user-input" placeholder="Enter Zip Code, or Address">
-           </div>
-            <button class="button" type="button" id="generate-button">Generate!</button> 
-            <div id="city-list" style="display: none;"></div>
+      <!-- end col 1 -->
+
+    <!-- start col 2 -->
+      <div class="column col-2" id="b">
+        <h1 id="main-title"><span>Audible </span>Atmosphere<span>.</span></h1>
+        <div>
+        <h2 id="slogan">Turn The Weather Into Music!</h2>
         </div>
-        
+        <p id="info-p">Generate a random music playlist based on the weather in your area.</p>
+          <div> 
+              <input class="input" type="text" id = "user-input" placeholder="Enter Zip Code">
+          </div>
+          <button class="button" type="button" id="generate-button">Generate!</button> 
+          <div id="city-list" style="display: none;"></div>
+      </div>
+    <!-- end col 2 -->
 
-
-
-
-
+    <!-- start col 3 -->      
         <div class="column col-3" id="c">
           <div>
             <div class="box">
@@ -73,14 +79,23 @@
             </div>
         </div>
       </div>
+    </div>
+    <!-- end col 3 -->
+<!-- End Columns -->
 
 
+<footer>
+  <a class="navbar-item" href="https://bulma.io">
+    <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+  </a>
+  <a class="navbar-item">
+    Home
+  </a>
+  <a class="navbar-item">
+    GitHub Repo
+  </a>
+</footer>
 
-
-
-
-
-
-      <script src="assets/js/script.js"></script>
-  </body>
+  <script src="assets/js/script.js"></script>
+</body>
 </html>
