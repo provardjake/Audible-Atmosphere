@@ -12,8 +12,10 @@ var searchCountry1 = [];
 
 
 
+document.getElementById("generate-button")?.addEventListener("click", function(event){
+
 //listen for input of city name or zip code
-searchButton.addEventListener("click", function(event){
+
     event.preventDefault();
     var userInput = document.querySelector("#user-input").value;
     var checkUserInput = parseInt(userInput);
@@ -24,6 +26,8 @@ searchButton.addEventListener("click", function(event){
         getZipCode(userInput);
     }
 });
+
+
 
 //get latitude and longitude from the geo api when user inputs city. 
 function getCityName(userInput){
@@ -80,94 +84,135 @@ function getZipCode(userInput){
             getWeather(cityLatitude, cityLongitude);
         })
     }
+  
 
-function getWeather(cityLatitude, cityLongitude){
-    var openWeatherRequestURL = "https://api.openweathermap.org/data/2.5/weather?lat="+cityLatitude+"&lon="+cityLongitude+"&appid="+jakeAPIKeyOpenWeather+"&units=imperial";
+    function getWeather(cityLatitude, cityLongitude){
+        var openWeatherRequestURL = "https://api.openweathermap.org/data/2.5/weather?lat="+cityLatitude+"&lon="+cityLongitude+"&appid="+jakeAPIKeyOpenWeather+"&units=imperial";
+        
+        fetch(openWeatherRequestURL)
+        .then(function(response){
+            return response.json();
+        })
+        .then(function(data){
+            var searchLat = [cityLatitude];
+            var searchLon = [cityLongitude];
+            var searchCity = [data.name];
+            var searchCountry = [data.sys.country];
+            console.log(searchCountry);
     
-    fetch(openWeatherRequestURL)
-    .then(function(response){
-        return response.json();
-    })
-    .then(function(data){
-        var searchLat = [cityLatitude];
-        var searchLon = [cityLongitude];
-        var searchCity = [data.name];
-        var searchCountry = [data.sys.country];
-        console.log(searchCountry);
-
-
-        localStorage.setItem("latitudeSave",JSON.stringify(searchLat));
-        localStorage.setItem("longitudeSave",JSON.stringify(searchLon));
-        localStorage.setItem("citySave",JSON.stringify(searchCity));
-        localStorage.setItem("countrySave",JSON.stringify(searchCountry));
-
-        searchLat1.push(searchLat);
-        searchLon1.push(searchLon);
-        searchCity1.push(searchCity);
-        searchCountry1.push(searchCountry);
-      
-        
-        console.log(searchLat);
-        console.log(searchLon);
-        console.log(searchCity);
-        console.log(searchCountry);
-
-
-        localStorage.setItem("latitudeSave",JSON.stringify(searchLat1));
-        localStorage.setItem("longitudeSave",JSON.stringify(searchLon1));
-        localStorage.setItem("citySave",JSON.stringify(searchCity1));
-        localStorage.setItem("countrySave",JSON.stringify(searchCountry1));
-
-       // Retrieve the object from storage to add a new student
-       // var retrievedSearches = localStorage.getItem("searches");
-        //var stored = JSON.parse(retrievedSearches);
-
-        //stored.push(recentLocations);
-        //localStorage.setItem("searches", JSON.stringify(stored));
-
-
-
-        //citySearch.push(recentLocations);
-        //console.log(citySearch);
-        //citySearch = JSON.parse(localStorage.getItem("citySearch") || "[]");
-        //console.log(citySearch);
-        //citySearch.push(recentLocations);
-        //console.log(citySearch);
-        //localStorage.setItem("citySearch",JSON.stringify(citySearch));
-
-        //for(var i = 0; i < recentLocations.length; i++){
-        //    var searchInput = document.createElement("button");
-        //    searchInput.setAttribute("type", "button");
-        //    searchInput.setAttribute("data-array-index", i);
-        //    searchInput.setAttribute("class", "list-group-item list-group-item-action list-group-item-secondary"); 
-        //   searchInput.setAttribute("style", "display:block;");
-        //}
-
-       // console.log(recentLocations);
-        getMusicType(data.weather[0].id);
-    })
-}
-
-
-
-
-
-
-
-function generatePlaylist(genreOne, genreTwo, genreThree){
-    if(genreOne != undefined && genreTwo != undefined && genreThree === undefined){
-        
+    
+            localStorage.setItem("latitudeSave",JSON.stringify(searchLat));
+            localStorage.setItem("longitudeSave",JSON.stringify(searchLon));
+            localStorage.setItem("citySave",JSON.stringify(searchCity));
+            localStorage.setItem("countrySave",JSON.stringify(searchCountry));
+    
+            searchLat1.push(searchLat);
+            searchLon1.push(searchLon);
+            searchCity1.push(searchCity);
+            searchCountry1.push(searchCountry);
+          
+            
+            console.log(searchLat);
+            console.log(searchLon);
+            console.log(searchCity);
+            console.log(searchCountry);
+    
+    
+            localStorage.setItem("latitudeSave",JSON.stringify(searchLat1));
+            localStorage.setItem("longitudeSave",JSON.stringify(searchLon1));
+            localStorage.setItem("citySave",JSON.stringify(searchCity1));
+            localStorage.setItem("countrySave",JSON.stringify(searchCountry1));
+    
+           // Retrieve the object from storage to add a new student
+           // var retrievedSearches = localStorage.getItem("searches");
+            //var stored = JSON.parse(retrievedSearches);
+    
+            //stored.push(recentLocations);
+            //localStorage.setItem("searches", JSON.stringify(stored));
+    
+    
+    
+            //citySearch.push(recentLocations);
+            //console.log(citySearch);
+            //citySearch = JSON.parse(localStorage.getItem("citySearch") || "[]");
+            //console.log(citySearch);
+            //citySearch.push(recentLocations);
+            //console.log(citySearch);
+            //localStorage.setItem("citySearch",JSON.stringify(citySearch));
+    
+            //for(var i = 0; i < recentLocations.length; i++){
+            //    var searchInput = document.createElement("button");
+            //    searchInput.setAttribute("type", "button");
+            //    searchInput.setAttribute("data-array-index", i);
+            //    searchInput.setAttribute("class", "list-group-item list-group-item-action list-group-item-secondary"); 
+            //   searchInput.setAttribute("style", "display:block;");
+            //}
+    
+           // console.log(recentLocations);
+            getMusicType(data.weather[0].id);
+        })
     }
-    if(genreOne != undefined && genreTwo != undefined && genreThree != undefined){
 
-    }
-    else{
 
+function getRandomInteger(min, max) {
+    return Math.floor(Math.random() * (max - min) ) + min;
+  }
+
+
+function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
+    var requestURLGenre = "https://api.deezer.com/genre";
+    var requestURLArtist = "https://api.deezer.com/artist";
+    if(genreOneId != undefined && genreTwoId == undefined && genreThreeId == undefined){
+        var playlist = [];
+        fetch(deezerRequestURLPrefix+requestURLGenre+"/"+genreOneId+"/artists")
+        .then(function (response){
+            return response.json();
+        })
+        .then(function(data){
+            for(var i = 0; i < 10; i++){
+                var randomArtist = data.data[getRandomInteger(0, data.data.length)];
+                var artistId = randomArtist.id;
+                fetch(deezerRequestURLPrefix+requestURLArtist+"/"+artistId+"/top")
+                .then(function (response){
+                    return response.json();
+                })
+                .then(function(data){
+                    var randomSong = data.data[getRandomInteger(0, data.data.length)];
+                    playlist.push(randomSong.title_short+" by "+randomSong.artist.name);
+                });
+            }
+        });
     }
-}
+    if(genreOneId != undefined && genreTwoId != undefined && genreThreeId == undefined){
+        var playlist = [];
+        for(var i = 0; i < 10; i++){
+            var genreArray = [genreOneId, genreTwoId];
+            var randomGenreId = getRandomInteger(0,2);
+            fetch(deezerRequestURLPrefix+requestURLGenre+"/"+genreArray[randomGenreId]+"/artists")
+            .then(function(response){
+                return response.json();
+            })
+            .then(function(data){
+                var randomArtist = data.data[getRandomInteger(0, data.data.length)];
+                var artistId = randomArtist.id;
+                fetch(deezerRequestURLPrefix+requestURLArtist+"/"+artistId+"/top")
+                .then(function(response){
+                    return response.json();
+                })
+                .then(function(data){
+                    var randomSong = data.data[getRandomInteger(0, data.data.length)];
+                    playlist.push(randomSong.title_short+" by "+randomSong.artist.name);
+                    console.log(playlist);
+                });
+            });
+        }
+    }
+
+generatePlaylist(152, 464, 106);
 
 // this function takes in the id of the weather conditions and then applies a music genre based off that id. 
 function getMusicType(weatherConditionId){
+    // the following arrays are all ids for certain weather conditions in the openweather api
     const thunderstorm = [200, 201, 202, 210, 211, 212, 221, 230, 231, 232];
     const drizzle = [300, 302, 310, 311, 312, 313, 314, 321];
     const rain = [500, 501, 502, 503, 504, 511, 520, 521, 522, 532];
@@ -175,7 +220,8 @@ function getMusicType(weatherConditionId){
     const atmosphere = [701, 711, 721, 731, 741, 751, 761, 762, 771, 781];
     const clear = [800];
     const clouds = [801, 802, 803, 804];
-    const genreArray = ["Rock", "Metal", "Pop", "Rap/Hip Hop", "Electro", "Country", "Classical", "Dance", "Jazz", "Blues", "Alternative", "Soul & Funk"] ;
+    //the below array is ids for genres in the deezer api
+    const genreArray = [152, 464, 132, 116, 106, 84, 98, 113, 129, 153, 85, 169];
 
 
     if(weatherConditionId === thunderstorm){
