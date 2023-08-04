@@ -61,34 +61,6 @@ function getCityName(userInput){
         })
     }
     
-function getZipCode(userInput){
-        var requestUrl = "http://api.openweathermap.org/geo/1.0/zip?zip="+userInput+",US&appid="+jakeAPIKeyOpenWeather;
-        var cityLongitude;
-        var cityLatitude;
-        fetch(requestUrl)
-        .then(function(response){
-            return response.json();
-        })
-        .then(function(data){
-            cityLatitude = data.lat;
-            cityLongitude = data.lon;
-            getWeather(cityLatitude, cityLongitude);
-        })
-    }
-
-
-// function getCoordinates(requestLatLong){
-//     fetch(requestLatLong)
-//     .then(function (response){
-//         return response.json();
-//     })
-//     .then(function(data){
-//     console.log(data)
-//     });
-//   }
-  
-//   getCoordinates(requestLatLong);
-  
 
 function getZipCode(userInput){
     var requestUrl = "http://api.openweathermap.org/geo/1.0/zip?zip="+userInput+",US&appid="+jakeAPIKeyOpenWeather;
@@ -142,41 +114,10 @@ fetch(openWeatherRequestURL)
     localStorage.setItem("citySave",JSON.stringify(searchCity1));
     localStorage.setItem("countrySave",JSON.stringify(searchCountry1));
 
-   // Retrieve the object from storage to add a new student
-   // var retrievedSearches = localStorage.getItem("searches");
-    //var stored = JSON.parse(retrievedSearches);
-
-    //stored.push(recentLocations);
-    //localStorage.setItem("searches", JSON.stringify(stored));
-
-
-
-    //citySearch.push(recentLocations);
-    //console.log(citySearch);
-    //citySearch = JSON.parse(localStorage.getItem("citySearch") || "[]");
-    //console.log(citySearch);
-    //citySearch.push(recentLocations);
-    //console.log(citySearch);
-    //localStorage.setItem("citySearch",JSON.stringify(citySearch));
-
-    //for(var i = 0; i < recentLocations.length; i++){
-    //    var searchInput = document.createElement("button");
-    //    searchInput.setAttribute("type", "button");
-    //    searchInput.setAttribute("data-array-index", i);
-    //    searchInput.setAttribute("class", "list-group-item list-group-item-action list-group-item-secondary"); 
-    //   searchInput.setAttribute("style", "display:block;");
-    //}
-
-   // console.log(recentLocations);
     getMusicType(data.weather[0].id);
 })
 }
 
-getWeather(requestWeatherUrl);
-
-function getWeatherId(){
-    return;
-}
 
 function getRandomInteger(min, max) {
     return Math.floor(Math.random() * (max - min) ) + min;
