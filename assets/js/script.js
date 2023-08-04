@@ -13,6 +13,9 @@ var searchCountry1 = [];
 
 
 document.getElementById("generate-button")?.addEventListener("click", function(event){
+
+//listen for input of city name or zip code
+
     event.preventDefault();
     var userInput = document.querySelector("#user-input").value;
     var checkUserInput = parseInt(userInput);
@@ -25,6 +28,8 @@ document.getElementById("generate-button")?.addEventListener("click", function(e
 });
 
 
+
+//get latitude and longitude from the geo api when user inputs city. 
 function getCityName(userInput){
     var requestUrl = "http://api.openweathermap.org/geo/1.0/direct?q="+userInput+"&limit=5&appid="+jakeAPIKeyOpenWeather;
     var cityLongitude;
@@ -34,22 +39,23 @@ function getCityName(userInput){
     .then(function(response){
         return response.json();
     })
-        .then(function(data){
-            for(var i = 0; i < data.length; i++){
-                var cityListItem = document.createElement("button");
-                cityListItem.setAttribute("type", "button");
-                cityListItem.setAttribute("data-array-index", i);
-                cityListItem.setAttribute("class", "list-group-item list-group-item-action list-group-item-secondary"); // change classes.  They are bootstrap
-                if(data[i].state === undefined || data[i].country !== "US"){
-                    cityListItem.textContent = data[i].name+", "+data[i].country;
-                }
-                else{
-                    cityListItem.textContent = data[i].name+", "+data[i].state;
-                }
+    .then(function(data){
+        for(var i = 0; i < data.length; i++){
+            var cityListItem = document.createElement("button");
+            cityListItem.setAttribute("type", "button");
+            cityListItem.setAttribute("data-array-index", i);
+            cityListItem.setAttribute("class", "list-group-item list-group-item-action list-group-item-secondary"); 
+            cityListItem.setAttribute("style", "display:block;");
+            if(data[i].state === undefined || data[i].country !== "US"){
+                cityListItem.textContent = data[i].name+", "+data[i].country;
+            }
+            else{
+                cityListItem.textContent = data[i].name+", "+data[i].state;
+            }
                 cityArray.push(data[i]);
                 cityList.appendChild(cityListItem);
             }
-            cityList.style.display = "flex";
+            cityList.style.display = "block";
             document.addEventListener("click", function(event){
                 event.preventDefault();
                 const target = event.target.closest(".list-group-item");
@@ -58,11 +64,12 @@ function getCityName(userInput){
                     cityLatitude = cityArray[cityArrayIndex].lat;
                     cityLongitude = cityArray[cityArrayIndex].lon;
                     getWeather(cityLatitude, cityLongitude);
-                }
-            })
+                    //console.log(cityLatitude + " " + cityLongitude);
+            }
         })
-    }
-    
+    })
+}
+//If user inputs only numbers use the geo api to get latitude and longitude from zip code.     
 function getZipCode(userInput){
         var requestUrl = "http://api.openweathermap.org/geo/1.0/zip?zip="+userInput+",US&appid="+jakeAPIKeyOpenWeather;
         var cityLongitude;
@@ -146,17 +153,15 @@ function getZipCode(userInput){
         })
     }
 
-getWeather(requestWeatherUrl);
-
 
 function getRandomInteger(min, max) {
     return Math.floor(Math.random() * (max - min) ) + min;
   }
 
+
 function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
     var requestURLGenre = "https://api.deezer.com/genre";
     var requestURLArtist = "https://api.deezer.com/artist";
-    
     if(genreOneId != undefined && genreTwoId == undefined && genreThreeId == undefined){
         var playlist = [];
         fetch(deezerRequestURLPrefix+requestURLGenre+"/"+genreOneId+"/artists")
@@ -180,7 +185,6 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
     }
     if(genreOneId != undefined && genreTwoId != undefined && genreThreeId == undefined){
         var playlist = [];
-
         for(var i = 0; i < 10; i++){
             var genreArray = [genreOneId, genreTwoId];
             var randomGenreId = getRandomInteger(0,2);
@@ -203,35 +207,6 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
             });
         }
     }
-
-    if(genreOneId != undefined && genreTwoId != undefined && genreThreeId != undefined){
-        var playlist = [];
-
-        for(var i = 0; i < 10; i++){
-            var genreArray = [genreOneId, genreTwoId, genreThreeId];
-            var randomGenreId = getRandomInteger(0,3);
-            fetch(deezerRequestURLPrefix+requestURLGenre+"/"+genreArray[randomGenreId]+"/artists")
-            .then(function(response){
-                return response.json();
-            })
-            .then(function(data){
-                var randomArtist = data.data[getRandomInteger(0, data.data.length)];
-                var artistId = randomArtist.id;
-                fetch(deezerRequestURLPrefix+requestURLArtist+"/"+artistId+"/top")
-                .then(function(response){
-                    return response.json();
-                })
-                .then(function(data){
-                    var randomSong = data.data[getRandomInteger(0, data.data.length)];
-                    playlist.push(randomSong.title_short+" by "+randomSong.artist.name);
-                    console.log(data);
-                });
-            });
-        }
-    }   
-
- 
-}
 
 generatePlaylist(152, 464, 106);
 
