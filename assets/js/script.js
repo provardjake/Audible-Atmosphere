@@ -12,6 +12,7 @@ var searchCountry1 = [];
 var cityZip = [];
 var searchCityZip1 = [];
 var playlistBody = document.querySelector("#playlist-body");
+var currentLocation;
 
 
 document.getElementById("generate-button")?.addEventListener("click", function(event){
@@ -80,6 +81,7 @@ function getZipCode(userInput){
         cityLatitude = data.lat;
         cityLongitude = data.lon;
         cityZip = userInput;
+        currentLocation = data.name;
         getWeather(cityLatitude, cityLongitude);
     })
 }
@@ -117,6 +119,7 @@ fetch(openWeatherRequestURL)
     localStorage.setItem("countrySave",JSON.stringify(searchCountry1));
     localStorage.setItem("zipCode",JSON.stringify(searchCityZip1));
     getMusicType(data.weather[0].id);
+    displayWeather(data);
     displayRecentSearches();
 })
 }
@@ -151,7 +154,6 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
     var requestURLArtist = "https://api.deezer.com/artist";
     
     if(genreOneId != undefined && genreTwoId == undefined && genreThreeId == undefined){
-        var playlist;
         fetch(deezerRequestURLPrefix+requestURLGenre+"/"+genreOneId+"/artists")
         .then(function (response){
             return response.json();
@@ -175,8 +177,6 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
         });
     }
     if(genreOneId != undefined && genreTwoId != undefined && genreThreeId == undefined){
-        var playlist;
-
         for(var i = 0; i < 10; i++){
             var genreArray = [genreOneId, genreTwoId];
             var randomGenreId = getRandomInteger(0,2);
@@ -204,8 +204,6 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
 
 
     if(genreOneId != undefined && genreTwoId != undefined && genreThreeId != undefined){
-        var playlist;
-
         for(var i = 0; i < 10; i++){
             var genreArray = [genreOneId, genreTwoId, genreThreeId];
             var randomGenreId = getRandomInteger(0,3);
@@ -233,6 +231,37 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
 
 }
 
+function displayWeather(data){
+    var weatherBox = document.getElementById("weather-box");
+    var currentWeatherLocation = document.getElementById("weather-location-text");
+
+    var weatherContainer = document.createElement("div");
+    var currentTemp = document.createElement("h1");
+    var highTemp = document.createElement("h3");
+    var lowTemp = document.createElement("h3");
+    var currentConditions = document.createElement("h3");
+
+    
+    currentTemp.setAttribute("id", "current-temp");
+    highTemp.setAttribute("class", "highlow-temp");
+    lowTemp.setAttribute("class", "highlow-temp");
+    currentConditions.setAttribute("id", "current-conditions")
+
+    currentWeatherLocation.textContent = "Current weather in "+currentLocation;
+    currentTemp.textContent = Math.round(data.main.temp)+"°";
+    highTemp.textContent = "↑"+Math.round(data.main.temp_max)+"°";
+    lowTemp.textContent = "↓"+Math.round(data.main.temp_min)+"°";
+    currentConditions.textContent = data.weather[0].description;
+    
+
+    weatherBox.appendChild(weatherContainer);
+    weatherContainer.appendChild(currentTemp);
+    weatherContainer.appendChild(highTemp);
+    weatherContainer.appendChild(lowTemp);
+    weatherContainer.appendChild(currentConditions);
+    console.log(data);
+}
+
 function displayPlaylist(playlistTitle, playlistArtist, albumCoverLink){
     var playListUl = document.getElementById("playlist");
 
@@ -245,12 +274,11 @@ function displayPlaylist(playlistTitle, playlistArtist, albumCoverLink){
     playlistItem.setAttribute("class", "playlist-item");
     albumCover.setAttribute("src", albumCoverLink);
     albumCover.setAttribute("class", "album-cover-picture");
-    playlistItemContainer.setAttribute("calss", "playlist-item-container");
-    playlistItemSong.setAttribute("class", "playlist-item-text");
+    playlistItemContainer.setAttribute("class", "playlist-item-container");
     playlistItemArtist.setAttribute("class", "playlist-item-text");
+    playlistItemSong.setAttribute("class", "playlist-item-text");
     playlistItemSong.textContent = playlistTitle;
     playlistItemArtist.textContent = playlistArtist;
-    
     playListUl.appendChild(playlistItem);
     playlistItem.appendChild(playlistItemContainer);
     playlistItemContainer.appendChild(playlistItemSong);
