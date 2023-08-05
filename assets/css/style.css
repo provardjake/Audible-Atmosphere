@@ -29,7 +29,7 @@ body {
   text-align: center;
 }
 
-#side-column { /* Specific to index.html */
+.side-column { /* Specific to index.html */
   min-height: 92vh;
 }
 
@@ -97,7 +97,7 @@ footer {
 #playlist-box { /* Specific to playlist.html */
   margin-top: 10px;
   width: 800px;
-  height: 500px;
+  height: auto;
 }
 
 #weather-box { /* Specific to playlist.html */
@@ -112,11 +112,64 @@ footer {
   align-items: center;
 }
 
+#current-temp{
+  font-size: 500%;
+}
+
+#current-conditions{
+  font-size: 200%;
+}
+
+.highlow-temp{
+  text-align: center;
+  display: inline-block;
+  margin-left: 2%;
+  margin-right: 2%;
+  font-size: 200%;
+}
+
+.playlist-item-container{
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: auto;
+  justify-content: left;
+}
+
+.playlist-item{
+  display: flex;
+  font-size: 150%;
+  margin-top: 1%;
+  margin-bottom: 1%;;
+  flex-direction: row-reverse;
+  justify-content: left;
+}
+
+.playlist-item-text{
+  display: inline-block;
+}
+
+
+
+
 /* Page responsiveness */
 @media screen and (max-width:890px) {
   #main-title {
     font-size: 30px;
   }
+
+  .playlist-item{
+    font-size: 100%;
+  }
+
+  .album-cover-picture{
+    width: 48px;
+    height: auto;
+  }
+
+  #current-temp{
+    font-size: 300%;
+  }
+
 
   #user-input {
     font-size: 15px;
@@ -166,7 +219,8 @@ footer {
   #playlist-box { 
     margin-top: 10px;
     width: 500px;
-    height: 500px;
+    height: auto;
+=======
   }
   
   #weather-box { 
