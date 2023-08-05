@@ -176,6 +176,7 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
             }
         });
     }
+
     if(genreOneId != undefined && genreTwoId != undefined && genreThreeId == undefined){
         for(var i = 0; i < 10; i++){
             var genreArray = [genreOneId, genreTwoId];

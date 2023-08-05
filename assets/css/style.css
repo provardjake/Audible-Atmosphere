@@ -150,6 +150,7 @@ footer {
 
 
 
+
 /* Page responsiveness */
 @media screen and (max-width:890px) {
   #main-title {
@@ -168,6 +169,7 @@ footer {
   #current-temp{
     font-size: 300%;
   }
+
 
   #user-input {
     font-size: 15px;
@@ -218,6 +220,7 @@ footer {
     margin-top: 10px;
     width: 500px;
     height: auto;
+=======
   }
   
   #weather-box { 
