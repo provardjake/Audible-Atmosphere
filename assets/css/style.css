@@ -1,12 +1,10 @@
 * {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 html {
-  height: 100%;
+  /* height: 100vh; */
   margin: 0;
   padding: 0;
   background-size: cover;
@@ -15,17 +13,12 @@ html {
   background-position: center;
   background-repeat: no-repeat;
 }
-
 body {
   font-family: josefin sans;
 }
-
-
 .navbar {
   box-shadow: 0px .008px 10px .008px rgb(206, 206, 206);
 }
-
-
 /* all columns */
 .columns {
   min-height: 100%;
@@ -40,22 +33,26 @@ body {
   #a{order:2;}
   #b{order:1;}
   #c{order:3;}
+
+  #main-logo {
+    width: 250px;
+    height: 250px;
+  }
 }
 
 .box {
   min-height: 92vh ;
-
 }
+
+
 @media screen and (max-width:890px) {
   .box {
     min-height: 200px;
   }
 }
-
 h2 {
   font-size: 20px;
 }
-
 .col-1, .col-3 {
   min-height: 100vh;
   padding-left: 30px;
@@ -70,10 +67,6 @@ h2 {
   }
 }
 /* all columns end */
-
-
-
-
 /* target col 2 start*/
 .col-2 {
   margin-top: 120px;
@@ -84,8 +77,6 @@ h2 {
     margin-bottom: 50px;
   }
 }
-
-
 #main-title {
   font-size: 45px;
   color: black;
@@ -95,6 +86,7 @@ h2 {
     font-size: 35px;
   }
 }
+
 @media screen and (max-width:1390px) {
   #main-title {
     font-size: 32px;
@@ -115,13 +107,9 @@ h2 {
     font-size: 30px;
   }
 }
-
-
 span {
   color:#4678a0;
 }
-
-
 #slogan {
   margin-bottom: 8px;
   font-size: 25px;
@@ -137,8 +125,6 @@ span {
     font-size: 16px;
   }
 }
-
-
 #info-p {
   font-size: 16px;
   color: dark grey;
@@ -159,8 +145,6 @@ span {
     font-size: 15px;
   }
 }
-
-
 .input {
   text-align: center;
   margin-bottom: 20px;
@@ -171,8 +155,6 @@ span {
     margin-bottom: 0px;
   }
 }
-
-
 .button {
   background-color: #F2D57E;
   color: black;
@@ -184,7 +166,6 @@ span {
   }
 }
 /* target col 2 end */
-
 footer {
   display: flex;
   border: none;
@@ -192,10 +173,23 @@ footer {
   box-shadow: 0px .008px 10px .008px rgb(206, 206, 206);
   height: 100px;
   background-color: white;
-
 }
 @media screen and (max-width:890px) {
   footer {
-margin-top: 40px;
+    margin-top: 40px;
   }
 }
+
+
+
+#playlist-box { /* Specific to playlist.html */
+  margin-top: 10px;
+  width: 500px;
+  height: 500px;
+}
+
+#weather-box { /* Specific to playlist.html */
+  width: 500px;
+  height: 300px;
+}
+
