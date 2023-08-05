@@ -3,8 +3,8 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 html {
-  /* height: 100vh; */
   margin: 0;
   padding: 0;
   background-size: cover;
@@ -13,159 +13,78 @@ html {
   background-position: center;
   background-repeat: no-repeat;
 }
+
 body {
   font-family: josefin sans;
 }
+
 .navbar {
   box-shadow: 0px .008px 10px .008px rgb(206, 206, 206);
 }
+
+
 /* all columns */
 .columns {
   min-height: 100%;
   text-align: center;
 }
-@media screen and (max-width:890px) {
-.columns {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-  #a{order:2;}
-  #b{order:1;}
-  #c{order:3;}
 
-  #main-logo {
-    width: 250px;
-    height: 250px;
-  }
+#side-column { /* Specific to index.html */
+  min-height: 92vh;
 }
 
-.box {
-  min-height: 92vh ;
-}
-
-
-@media screen and (max-width:890px) {
-  .box {
-    min-height: 200px;
-  }
-}
 h2 {
   font-size: 20px;
 }
+
 .col-1, .col-3 {
   min-height: 100vh;
   padding-left: 30px;
   padding-right: 30px;
   padding-top: 30px;
 }
-@media screen and (max-width:890px) {
-  .col-1, .col-3 {
-    min-height: 200px;
-    margin-bottom: 20px;
-    padding-top:0px;
-  }
-}
 /* all columns end */
+
+
+
 /* target col 2 start*/
 .col-2 {
   margin-top: 120px;
 }
-@media screen and (max-width:890px) {
-  .col-2 {
-    margin-top: 50px;
-    margin-bottom: 50px;
-  }
-}
+
 #main-title {
   font-size: 45px;
   color: black;
 }
-@media screen and (max-width:1460px) {
-  #main-title {
-    font-size: 35px;
-  }
-}
 
-@media screen and (max-width:1390px) {
-  #main-title {
-    font-size: 32px;
-  }
-}
-@media screen and (max-width:1130px) {
-  #main-title {
-    font-size: 30px;
-  }
-}
-@media screen and (max-width:970px) {
-  #main-title {
-    font-size: 25px;
-  }
-}
-@media screen and (max-width:890px) {
-  #main-title {
-    font-size: 30px;
-  }
-}
 span {
   color:#4678a0;
 }
+
 #slogan {
   margin-bottom: 8px;
   font-size: 25px;
   color: black;
 }
-@media screen and (max-width:1390px) {
-  #slogan {
-    font-size: 20px;
-  }
-}
-@media screen and (max-width:1130px) {
-  #slogan {
-    font-size: 16px;
-  }
-}
+
 #info-p {
   font-size: 16px;
   color: dark grey;
   margin-bottom: 15px;
 }
-@media screen and (max-width:1390px) {
-  #info-p {
-    font-size: 12px;
-  }
-}
-@media screen and (max-width:1130px) {
-  #info-p {
-    font-size: 12px;
-  }
-}
-@media screen and (max-width:890px) {
-  #user-input {
-    font-size: 15px;
-  }
-}
+
 .input {
   text-align: center;
   margin-bottom: 20px;
 }
-@media screen and (max-width:890px) {
-  #user-input {
-    width: 350px;
-    margin-bottom: 0px;
-  }
-}
+
 .button {
   background-color: #F2D57E;
   color: black;
 }
-@media screen and (max-width:890px) {
-  #generate-button {
-    margin-top: 20px;
-    width: 150px;
-  }
-}
 /* target col 2 end */
+
+
 footer {
   display: flex;
   border: none;
@@ -174,22 +93,125 @@ footer {
   height: 100px;
   background-color: white;
 }
-@media screen and (max-width:890px) {
-  footer {
-    margin-top: 40px;
-  }
-}
-
-
 
 #playlist-box { /* Specific to playlist.html */
   margin-top: 10px;
-  width: 500px;
+  width: 800px;
   height: 500px;
 }
 
 #weather-box { /* Specific to playlist.html */
-  width: 500px;
+  width: 800px;
   height: 300px;
 }
 
+#display-boxes {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Page responsiveness */
+@media screen and (max-width:890px) {
+  #main-title {
+    font-size: 30px;
+  }
+
+  #user-input {
+    font-size: 15px;
+    width: 350px;
+    margin-bottom: 0px;
+  }
+
+  #generate-button {
+    margin-top: 20px;
+    width: 150px;
+  }
+
+  footer {
+    margin-top: 40px;
+  }
+
+  .col-1, .col-3 {
+    min-height: 200px;
+    margin-bottom: 20px;
+    padding-top:0px;
+  }
+
+  .col-2 {
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+
+  #side-column {
+    min-height: 200px;
+  }
+
+  .columns {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #a{order:2;}
+  #b{order:1;}
+  #c{order:3;}
+
+  #main-logo {
+    width: 250px;
+    height: 250px;
+  }
+
+  #playlist-box { 
+    margin-top: 10px;
+    width: 500px;
+    height: 500px;
+  }
+  
+  #weather-box { 
+    width: 500px;
+    height: 300px;
+  }
+}
+
+@media screen and (max-width:970px) {
+  #main-title {
+    font-size: 25px;
+  }
+}
+
+@media screen and (max-width:1130px) {
+  #main-title {
+    font-size: 30px;
+  }
+
+  #slogan {
+    font-size: 16px;
+  }
+
+  #info-p {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width:1390px) {
+  #main-title {
+    font-size: 32px;
+  }
+
+  #slogan {
+    font-size: 20px;
+  }
+
+  #info-p {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width:1460px) {
+  #main-title {
+    font-size: 35px;
+  }
+}
+/* End page responsiveness */
