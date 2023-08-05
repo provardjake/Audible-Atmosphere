@@ -12,21 +12,21 @@ var searchCountry1 = [];
 var cityZip = [];
 var searchCityZip1 = [];
 var playlistBody = document.querySelector("#playlist-body");
-var storedUserInput = JSON.parse(localStorage.getItem("zipCode") || "[]");
-console.log(storedUserInput);
+
 
 document.getElementById("generate-button")?.addEventListener("click", function(event){
     event.preventDefault();
     var userInput = document.querySelector("#user-input").value;
-    var checkUserInput = parseInt(userInput);
-    //if(isNaN(checkUserInput)){
-        //getCityName(userInput);
-    //}
-   // else{
-        //getZipCode(userInput);
-        playlistBody.onload = getZipCode(userInput);
-   // }
+    localStorage.setItem("userInput", userInput);
+    document.location.href='playlist.html';
 });
+
+function playlistLoad(){
+    if(playlistBody != null){
+        var userInput = JSON.parse(localStorage.getItem("userInput"));
+        getZipCode(userInput);
+    }
+}
 
 function getCityName(userInput){
     var requestUrl = "http://api.openweathermap.org/geo/1.0/direct?q="+userInput+"&limit=5&appid="+jakeAPIKeyOpenWeather;
@@ -125,11 +125,20 @@ fetch(openWeatherRequestURL)
 function displayRecentSearches(){
     var results = JSON.parse(localStorage.getItem("zipCode"));
     var lastElement = results[results.length - 1];
-    var resultsContainer = document.getElementById("resultsContainer");
-    console.log(results);
+    var resultsContainer = document.getElementById("results-container");
     var resultsElement = document.createElement("p");
     resultsElement.textContent = lastElement;
     resultsContainer.appendChild(resultsElement);
+}
+
+function renderRecentSearches(){
+    var zipCodeArray = JSON.parse(localStorage.getItem("zipCode"));
+    var resultsContainer = document.getElementById("results-container");
+    for(var i = 0; i < zipCodeArray.length; i++){
+        var resultsElement = document.createElement("p");
+        resultsElement.textContent = zipCodeArray[i];
+        resultsContainer.appendChild(resultsElement);
+    }
 }
 
 
@@ -142,7 +151,7 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
     var requestURLArtist = "https://api.deezer.com/artist";
     
     if(genreOneId != undefined && genreTwoId == undefined && genreThreeId == undefined){
-        var playlist = [];
+        var playlist;
         fetch(deezerRequestURLPrefix+requestURLGenre+"/"+genreOneId+"/artists")
         .then(function (response){
             return response.json();
@@ -157,14 +166,16 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
                 })
                 .then(function(data){
                     var randomSong = data.data[getRandomInteger(0, data.data.length)];
-                    playlist.push(randomSong.title_short+" by "+randomSong.artist.name);
-                    console.log(playlist);
+                    var albumCoverLink = randomSong.album.cover_small;
+                    playlistTitle = randomSong.title_short;
+                    playlistArtist = randomSong.artist.name;
+                    displayPlaylist(playlistTitle, playlistArtist, albumCoverLink);
                 });
             }
         });
     }
     if(genreOneId != undefined && genreTwoId != undefined && genreThreeId == undefined){
-        var playlist = [];
+        var playlist;
 
         for(var i = 0; i < 10; i++){
             var genreArray = [genreOneId, genreTwoId];
@@ -182,8 +193,10 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
                 })
                 .then(function(data){
                     var randomSong = data.data[getRandomInteger(0, data.data.length)];
-                    playlist.push(randomSong.title_short+" by "+randomSong.artist.name);
-                    console.log(playlist);
+                    var albumCoverLink = randomSong.album.cover_small;
+                    playlistTitle = randomSong.title_short;
+                    playlistArtist = randomSong.artist.name;
+                    displayPlaylist(playlistTitle, playlistArtist, albumCoverLink);
                 });
             });
         }
@@ -191,7 +204,7 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
 
 
     if(genreOneId != undefined && genreTwoId != undefined && genreThreeId != undefined){
-        var playlist = [];
+        var playlist;
 
         for(var i = 0; i < 10; i++){
             var genreArray = [genreOneId, genreTwoId, genreThreeId];
@@ -209,8 +222,10 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
                 })
                 .then(function(data){
                     var randomSong = data.data[getRandomInteger(0, data.data.length)];
-                    playlist.push(randomSong.title_short+" by "+randomSong.artist.name);
-                    console.log(playlist);
+                    var albumCoverLink = randomSong.album.cover_small;
+                    playlistTitle = randomSong.title_short;
+                    playlistArtist = randomSong.artist.name;
+                    displayPlaylist(playlistTitle, playlistArtist, albumCoverLink);
                 });
             });
         }
@@ -218,12 +233,29 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
 
 }
 
-function displayPlaylist(playlist){
+function displayPlaylist(playlistTitle, playlistArtist, albumCoverLink){
     var playListUl = document.getElementById("playlist");
 
     var playlistItem = document.createElement("li");
-    playlistItem.textContent = playlist;
+    var playlistItemContainer = document.createElement("div");
+    var playlistItemSong = document.createElement("li");
+    var playlistItemArtist = document.createElement("li");
+    var albumCover = document.createElement("img");
+
+    playlistItem.setAttribute("class", "playlist-item");
+    albumCover.setAttribute("src", albumCoverLink);
+    albumCover.setAttribute("class", "album-cover-picture");
+    playlistItemContainer.setAttribute("calss", "playlist-item-container");
+    playlistItemSong.setAttribute("class", "playlist-item-text");
+    playlistItemArtist.setAttribute("class", "playlist-item-text");
+    playlistItemSong.textContent = playlistTitle;
+    playlistItemArtist.textContent = playlistArtist;
+    
     playListUl.appendChild(playlistItem);
+    playlistItem.appendChild(playlistItemContainer);
+    playlistItemContainer.appendChild(playlistItemSong);
+    playlistItemContainer.appendChild(playlistItemArtist);
+    playlistItem.appendChild(albumCover);
 }
 
 //generatePlaylist(152, 464, 106);
@@ -268,5 +300,5 @@ function getMusicType(weatherConditionId){
     }
 
 }
-
-displayRecentSearches();
+playlistLoad();
+renderRecentSearches();
