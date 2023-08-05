@@ -98,12 +98,6 @@ fetch(openWeatherRequestURL)
     var searchCountry = [data.sys.country];
     console.log(data);
 
-    //localStorage.setItem("latitudeSave",JSON.stringify(searchLat));
-    //localStorage.setItem("longitudeSave",JSON.stringify(searchLon));
-    //localStorage.setItem("citySave",JSON.stringify(searchCity));
-    //localStorage.setItem("countrySave",JSON.stringify(searchCountry));
-    //localStorage.setItem("zipCode",JSON.stringify(cityZip));
-
     searchLat1 = JSON.parse(localStorage.getItem("latitudeSave") || "[]");
     searchLon1 = JSON.parse(localStorage.getItem("longitudeSave") || "[]");
     searchCity1 = JSON.parse(localStorage.getItem("citySave") || "[]");
@@ -127,18 +121,16 @@ fetch(openWeatherRequestURL)
 })
 }
 
+
 function displayRecentSearches(){
     var results = JSON.parse(localStorage.getItem("zipCode"));
+    var lastElement = results[results.length - 1];
     var resultsContainer = document.getElementById("resultsContainer");
     console.log(results);
-    for (i = 0; i < results.length; i++) {
-        var resultsElement = document.createElement("p");
-        resultsElement.textContent = results[i];
-        resultsContainer.appendChild(resultsElement);
-    }
-
+    var resultsElement = document.createElement("p");
+    resultsElement.textContent = lastElement;
+    resultsContainer.appendChild(resultsElement);
 }
-
 
 
 function getRandomInteger(min, max){
