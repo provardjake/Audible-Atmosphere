@@ -67,55 +67,55 @@ function getZipCode(userInput){
     var cityLongitude;
     var cityLatitude;
     fetch(requestUrl)
-    .then(function(response){
-        return response.json();
-    })
-    .then(function(data){
-        cityLatitude = data.lat;
-        cityLongitude = data.lon;
-        getWeather(cityLatitude, cityLongitude);
-    })
+        .then(function(response){
+            return response.json();
+        })
+        .then(function(data){
+            cityLatitude = data.lat;
+            cityLongitude = data.lon;
+            getWeather(cityLatitude, cityLongitude);
+        })
 }
 
 function getWeather(cityLatitude, cityLongitude){
 var openWeatherRequestURL = "https://api.openweathermap.org/data/2.5/weather?lat="+cityLatitude+"&lon="+cityLongitude+"&appid="+jakeAPIKeyOpenWeather+"&units=imperial";
 
-fetch(openWeatherRequestURL)
-.then(function(response){
-    return response.json();
-})
-.then(function(data){
-    var searchLat = [cityLatitude];
-    var searchLon = [cityLongitude];
-    var searchCity = [data.name];
-    var searchCountry = [data.sys.country];
-    console.log(searchCountry);
+    fetch(openWeatherRequestURL)
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(data){
+        var searchLat = [cityLatitude];
+        var searchLon = [cityLongitude];
+        var searchCity = [data.name];
+        var searchCountry = [data.sys.country];
+        console.log(searchCountry);
 
 
-    localStorage.setItem("latitudeSave",JSON.stringify(searchLat));
-    localStorage.setItem("longitudeSave",JSON.stringify(searchLon));
-    localStorage.setItem("citySave",JSON.stringify(searchCity));
-    localStorage.setItem("countrySave",JSON.stringify(searchCountry));
+        localStorage.setItem("latitudeSave",JSON.stringify(searchLat));
+        localStorage.setItem("longitudeSave",JSON.stringify(searchLon));
+        localStorage.setItem("citySave",JSON.stringify(searchCity));
+        localStorage.setItem("countrySave",JSON.stringify(searchCountry));
 
-    searchLat1.push(searchLat);
-    searchLon1.push(searchLon);
-    searchCity1.push(searchCity);
-    searchCountry1.push(searchCountry);
-  
+        searchLat1.push(searchLat);
+        searchLon1.push(searchLon);
+        searchCity1.push(searchCity);
+        searchCountry1.push(searchCountry);
     
-    console.log(searchLat);
-    console.log(searchLon);
-    console.log(searchCity);
-    console.log(searchCountry);
+        
+        console.log(searchLat);
+        console.log(searchLon);
+        console.log(searchCity);
+        console.log(searchCountry);
 
 
-    localStorage.setItem("latitudeSave",JSON.stringify(searchLat1));
-    localStorage.setItem("longitudeSave",JSON.stringify(searchLon1));
-    localStorage.setItem("citySave",JSON.stringify(searchCity1));
-    localStorage.setItem("countrySave",JSON.stringify(searchCountry1));
+        localStorage.setItem("latitudeSave",JSON.stringify(searchLat1));
+        localStorage.setItem("longitudeSave",JSON.stringify(searchLon1));
+        localStorage.setItem("citySave",JSON.stringify(searchCity1));
+        localStorage.setItem("countrySave",JSON.stringify(searchCountry1));
 
-    getMusicType(data.weather[0].id);
-})
+        getMusicType(data.weather[0].id);
+    })
 }
 
 
@@ -148,6 +148,7 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
             }
         });
     }
+
     if(genreOneId != undefined && genreTwoId != undefined && genreThreeId == undefined){
         var playlist = [];
 
@@ -174,7 +175,6 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
         }
     }
 
-
     if(genreOneId != undefined && genreTwoId != undefined && genreThreeId != undefined){
         var playlist = [];
 
@@ -200,9 +200,9 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
             });
         }
     }   
-
- 
 }
+ 
+
 
 
 generatePlaylist(152, 464, 106);
