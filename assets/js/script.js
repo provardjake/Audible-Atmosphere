@@ -9,6 +9,8 @@ var searchLat1 = [];
 var searchLon1 = [];
 var searchCity1 = [];
 var searchCountry1 = [];
+var cityZip = [];
+var searchCityZip1 = [];
 
 
 document.getElementById("generate-button")?.addEventListener("click", function(event){
@@ -73,6 +75,7 @@ function getZipCode(userInput){
     .then(function(data){
         cityLatitude = data.lat;
         cityLongitude = data.lon;
+        cityZip = userInput;
         getWeather(cityLatitude, cityLongitude);
     })
 }
@@ -89,39 +92,46 @@ fetch(openWeatherRequestURL)
     var searchLon = [cityLongitude];
     var searchCity = [data.name];
     var searchCountry = [data.sys.country];
-    console.log(searchCountry);
+    console.log(data);
 
-
-    localStorage.setItem("latitudeSave",JSON.stringify(searchLat));
-    localStorage.setItem("longitudeSave",JSON.stringify(searchLon));
-    localStorage.setItem("citySave",JSON.stringify(searchCity));
-    localStorage.setItem("countrySave",JSON.stringify(searchCountry));
+    searchLat1 = JSON.parse(localStorage.getItem("latitudeSave") || "[]");
+    searchLon1 = JSON.parse(localStorage.getItem("longitudeSave") || "[]");
+    searchCity1 = JSON.parse(localStorage.getItem("citySave") || "[]");
+    searchCountry1 = JSON.parse(localStorage.getItem("countrySave") || "[]");
+    searchCityZip1 = JSON.parse(localStorage.getItem("zipCode") || "[]");
 
     searchLat1.push(searchLat);
     searchLon1.push(searchLon);
     searchCity1.push(searchCity);
     searchCountry1.push(searchCountry);
+    searchCityZip1.push(cityZip);
   
     
-    console.log(searchLat);
-    console.log(searchLon);
-    console.log(searchCity);
-    console.log(searchCountry);
-
-
     localStorage.setItem("latitudeSave",JSON.stringify(searchLat1));
     localStorage.setItem("longitudeSave",JSON.stringify(searchLon1));
     localStorage.setItem("citySave",JSON.stringify(searchCity1));
     localStorage.setItem("countrySave",JSON.stringify(searchCountry1));
-
+    localStorage.setItem("zipCode",JSON.stringify(searchCityZip1));
     getMusicType(data.weather[0].id);
+    displayRecentSearches();
 })
 }
 
 
-function getRandomInteger(min, max) {
+function displayRecentSearches(){
+    var results = JSON.parse(localStorage.getItem("zipCode"));
+    var lastElement = results[results.length - 1];
+    var resultsContainer = document.getElementById("resultsContainer");
+    console.log(results);
+    var resultsElement = document.createElement("p");
+    resultsElement.textContent = lastElement;
+    resultsContainer.appendChild(resultsElement);
+}
+
+
+function getRandomInteger(min, max){
     return Math.floor(Math.random() * (max - min) ) + min;
-  }
+}
 
 function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
     var requestURLGenre = "https://api.deezer.com/genre";
@@ -144,6 +154,7 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
                 .then(function(data){
                     var randomSong = data.data[getRandomInteger(0, data.data.length)];
                     playlist.push(randomSong.title_short+" by "+randomSong.artist.name);
+                    console.log(playlist);
                 });
             }
         });
@@ -173,7 +184,7 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
             });
         }
     }
-}
+
 
     if(genreOneId != undefined && genreTwoId != undefined && genreThreeId != undefined){
         var playlist = [];
@@ -201,11 +212,8 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
         }
     }   
 
- 
 }
 
-
-generatePlaylist(152, 464, 106);
 
 // this function takes in the id of the weather conditions and then applies a music genre based off that id. 
 function getMusicType(weatherConditionId){
@@ -247,3 +255,5 @@ function getMusicType(weatherConditionId){
     }
 
 }
+
+displayRecentSearches();
