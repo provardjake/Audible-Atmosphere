@@ -13,7 +13,13 @@ var cityZip = [];
 var searchCityZip1 = [];
 var playlistBody = document.querySelector("#playlist-body");
 var currentLocation;
+var playlistTitleArray = [];
+var playlistArtistArray = [];
 
+document.getElementById("save-playlist-button")?.addEventListener("click", function(event){
+    event.preventDefault();
+    savePlaylist();
+})
 
 document.getElementById("generate-button")?.addEventListener("click", function(event){
     event.preventDefault();
@@ -22,6 +28,19 @@ document.getElementById("generate-button")?.addEventListener("click", function(e
     document.location.href='playlist.html';
 });
 
+function savePlaylist(){
+    var savedTitleArray = JSON.parse(localStorage.getItem("playlistTitle") || "[]");
+    var savedArtistArray = JSON.parse(localStorage.getItem("playlistArtist") || "[]");
+
+    savedTitleArray = playlistTitleArray;
+    savedArtistArray = playlistArtistArray;
+
+    localStorage.setItem("playlistTitle", JSON.stringify(savedTitleArray));
+    localStorage.setItem("playlistArtist", JSON.stringify(savedArtistArray));
+
+
+}
+
 function playlistLoad(){
     if(playlistBody != null){
         var userInput = JSON.parse(localStorage.getItem("userInput"));
@@ -29,43 +48,43 @@ function playlistLoad(){
     }
 }
 
-function getCityName(userInput){
-    var requestUrl = "http://api.openweathermap.org/geo/1.0/direct?q="+userInput+"&limit=5&appid="+jakeAPIKeyOpenWeather;
-    var cityLongitude;
-    var cityLatitude;
-    var cityArray = [];
-    fetch(requestUrl)
-    .then(function(response){
-        return response.json();
-    })
-        .then(function(data){
-            for(var i = 0; i < data.length; i++){
-                var cityListItem = document.createElement("button");
-                cityListItem.setAttribute("type", "button");
-                cityListItem.setAttribute("data-array-index", i);
-                cityListItem.setAttribute("class", "list-group-item list-group-item-action list-group-item-secondary"); // change classes.  They are bootstrap
-                if(data[i].state === undefined || data[i].country !== "US"){
-                    cityListItem.textContent = data[i].name+", "+data[i].country;
-                }
-                else{
-                    cityListItem.textContent = data[i].name+", "+data[i].state;
-                }
-                cityArray.push(data[i]);
-                cityList.appendChild(cityListItem);
-            }
-            cityList.style.display = "flex";
-            document.addEventListener("click", function(event){
-                event.preventDefault();
-                const target = event.target.closest(".list-group-item");
-                if(target){
-                    var cityArrayIndex = parseInt(target.getAttribute("data-array-index"));
-                    cityLatitude = cityArray[cityArrayIndex].lat;
-                    cityLongitude = cityArray[cityArrayIndex].lon;
-                    getWeather(cityLatitude, cityLongitude);
-                }
-            })
-        })
-    }
+// function getCityName(userInput){
+//     var requestUrl = "http://api.openweathermap.org/geo/1.0/direct?q="+userInput+"&limit=5&appid="+jakeAPIKeyOpenWeather;
+//     var cityLongitude;
+//     var cityLatitude;
+//     var cityArray = [];
+//     fetch(requestUrl)
+//     .then(function(response){
+//         return response.json();
+//     })
+//         .then(function(data){
+//             for(var i = 0; i < data.length; i++){
+//                 var cityListItem = document.createElement("button");
+//                 cityListItem.setAttribute("type", "button");
+//                 cityListItem.setAttribute("data-array-index", i);
+//                 cityListItem.setAttribute("class", "list-group-item list-group-item-action list-group-item-secondary"); // change classes.  They are bootstrap
+//                 if(data[i].state === undefined || data[i].country !== "US"){
+//                     cityListItem.textContent = data[i].name+", "+data[i].country;
+//                 }
+//                 else{
+//                     cityListItem.textContent = data[i].name+", "+data[i].state;
+//                 }
+//                 cityArray.push(data[i]);
+//                 cityList.appendChild(cityListItem);
+//             }
+//             cityList.style.display = "flex";
+//             document.addEventListener("click", function(event){
+//                 event.preventDefault();
+//                 const target = event.target.closest(".list-group-item");
+//                 if(target){
+//                     var cityArrayIndex = parseInt(target.getAttribute("data-array-index"));
+//                     cityLatitude = cityArray[cityArrayIndex].lat;
+//                     cityLongitude = cityArray[cityArrayIndex].lon;
+//                     getWeather(cityLatitude, cityLongitude);
+//                 }
+//             })
+//         })
+// }
     
 
 function getZipCode(userInput){
@@ -171,11 +190,14 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
                     var albumCoverLink = randomSong.album.cover_small;
                     playlistTitle = randomSong.title_short;
                     playlistArtist = randomSong.artist.name;
+                    playlistTitleArray.push(playlistTitle);
+                    playlistArtistArray.push(playlistArtist);
                     displayPlaylist(playlistTitle, playlistArtist, albumCoverLink);
                 });
             }
         });
     }
+
     if(genreOneId != undefined && genreTwoId != undefined && genreThreeId == undefined){
         for(var i = 0; i < 10; i++){
             var genreArray = [genreOneId, genreTwoId];
@@ -196,12 +218,13 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
                     var albumCoverLink = randomSong.album.cover_small;
                     playlistTitle = randomSong.title_short;
                     playlistArtist = randomSong.artist.name;
+                    playlistTitleArray.push(playlistTitle);
+                    playlistArtistArray.push(playlistArtist);
                     displayPlaylist(playlistTitle, playlistArtist, albumCoverLink);
                 });
             });
         }
     }
-
 
     if(genreOneId != undefined && genreTwoId != undefined && genreThreeId != undefined){
         for(var i = 0; i < 10; i++){
@@ -223,12 +246,13 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
                     var albumCoverLink = randomSong.album.cover_small;
                     playlistTitle = randomSong.title_short;
                     playlistArtist = randomSong.artist.name;
+                    playlistTitleArray.push(playlistTitle);
+                    playlistArtistArray.push(playlistArtist);
                     displayPlaylist(playlistTitle, playlistArtist, albumCoverLink);
                 });
             });
         }
     }   
-
 }
 
 function displayWeather(data){
@@ -286,7 +310,6 @@ function displayPlaylist(playlistTitle, playlistArtist, albumCoverLink){
     playlistItem.appendChild(albumCover);
 }
 
-//generatePlaylist(152, 464, 106);
 
 // this function takes in the id of the weather conditions and then applies a music genre based off that id. 
 function getMusicType(weatherConditionId){
@@ -302,31 +325,31 @@ function getMusicType(weatherConditionId){
     const genreArray = [152, 464, 132, 116, 106, 84, 98, 113, 129, 153, 85, 169];
 
 
-    if(weatherConditionId === thunderstorm){
+    if(thunderstorm.includes(weatherConditionId)){
         generatePlaylist(genreArray[0], genreArray[1], genreArray[4]);
     }
-    if(weatherConditionId === drizzle){
+    if(drizzle.includes(weatherConditionId)){
         generatePlaylist(genreArray[8], genreArray[9]);
     }
-    if(weatherConditionId === rain){
+    if(rain.includes(weatherConditionId)){
         generatePlaylist(genreArray[6], genreArray[9]);
     }
-    if(weatherConditionId === clear){
+    if(clear.includes(weatherConditionId)){
         generatePlaylist(genreArray[2], genreArray[3]);
     }
-    if(weatherConditionId === atmosphere){
+    if(atmosphere.includes(weatherConditionId)){
         generatePlaylist(genreArray[10], genreArray[7]);
     }
-    if(weatherConditionId === snow){
+    if(snow.includes(weatherConditionId)){
         generatePlaylist(genreArray[6], genreArray[11]);
     }
-    if(weatherConditionId === clouds){
+    if(clouds.includes(weatherConditionId)){
         generatePlaylist(genreArray[10], genreArray[2]);
     }
-    else{
+    if(weatherConditionId === undefined){
         generatePlaylist(genreArray[2]);
     }
-
 }
+
 playlistLoad();
 renderRecentSearches();
