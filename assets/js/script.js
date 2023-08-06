@@ -276,10 +276,10 @@ function displayPlaylist(playlistTitle, playlistArtist, albumCoverLink){
     albumCover.setAttribute("src", albumCoverLink);
     albumCover.setAttribute("class", "album-cover-picture");
     playlistItemContainer.setAttribute("class", "playlist-item-container");
-    playlistItemArtist.setAttribute("class", "playlist-item-text");
-    playlistItemSong.setAttribute("class", "playlist-item-text");
+    playlistItemArtist.setAttribute("class", "playlist-item-text artist-name");
+    playlistItemSong.setAttribute("class", "playlist-item-text song-title");
     playlistItemSong.textContent = playlistTitle;
-    playlistItemArtist.textContent = playlistArtist;
+    playlistItemArtist.textContent = "\n" + playlistArtist;
     playListUl.appendChild(playlistItem);
     playlistItem.appendChild(playlistItemContainer);
     playlistItemContainer.appendChild(playlistItemSong);
