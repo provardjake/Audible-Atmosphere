@@ -12,8 +12,16 @@ var searchCountry1 = [];
 var cityZip = [];
 var searchCityZip1 = [];
 var playlistBody = document.querySelector("#playlist-body");
+var indexBody = document.querySelector("#index-body");
 var currentLocation;
+var playlistTitleArray = [];
+var playlistArtistArray = [];
+var playlistAlbumCoverArray = [];
 
+document.getElementById("save-playlist-button")?.addEventListener("click", function(event){
+    event.preventDefault();
+    savePlaylist();
+})
 
 document.getElementById("generate-button")?.addEventListener("click", function(event){
     event.preventDefault();
@@ -22,6 +30,62 @@ document.getElementById("generate-button")?.addEventListener("click", function(e
     document.location.href='playlist.html';
 });
 
+//saves generaed playlist to local playlist
+function savePlaylist(){
+    var savedAlbumCoverArray = JSON.parse(localStorage.getItem("albumCover") || "[]");
+    var savedTitleArray = JSON.parse(localStorage.getItem("playlistTitle") || "[]");
+    var savedArtistArray = JSON.parse(localStorage.getItem("playlistArtist") || "[]");
+
+    savedAlbumCoverArray = playlistAlbumCoverArray;
+    savedTitleArray = playlistTitleArray;
+    savedArtistArray = playlistArtistArray;
+
+    localStorage.setItem("albumCover", JSON.stringify(savedAlbumCoverArray));
+    localStorage.setItem("playlistTitle", JSON.stringify(savedTitleArray));
+    localStorage.setItem("playlistArtist", JSON.stringify(savedArtistArray));
+
+
+    renderSavedPlaylist();
+}
+
+//displays saved playlist
+function renderSavedPlaylist(){
+    var playListUl = document.getElementById("saved-playlist");
+    var savedAlbumCoverArray = JSON.parse(localStorage.getItem("albumCover"));
+    var savedTitleArray = JSON.parse(localStorage.getItem("playlistTitle"));
+    var savedArtistArray = JSON.parse(localStorage.getItem("playlistArtist"));
+    if(indexBody != null && savedAlbumCoverArray != null){
+        if(savedAlbumCoverArray !== undefined){
+            for(var i = 0; i < savedAlbumCoverArray.length; i++){
+                var playlistItem = document.createElement("li");
+                var playlistItemContainer = document.createElement("div");
+                var playlistItemSong = document.createElement("li");
+                var playlistItemArtist = document.createElement("li");
+                var albumCover = document.createElement("img");
+    
+                playlistItem.setAttribute("class", "playlist-item");
+                albumCover.setAttribute("src", savedAlbumCoverArray[i]);
+                albumCover.setAttribute("class", "album-cover-picture");
+                playlistItemContainer.setAttribute("class", "playlist-item-container");
+                playlistItemArtist.setAttribute("class", "playlist-item-text artist-name");
+                playlistItemSong.setAttribute("class", "playlist-item-text song-title");
+                playlistItemSong.textContent = savedTitleArray[i];
+                playlistItemArtist.textContent = "\n" + savedArtistArray[i];
+                playListUl.appendChild(playlistItem);
+                playlistItem.appendChild(playlistItemContainer);
+                playlistItemContainer.appendChild(playlistItemSong);
+                playlistItemContainer.appendChild(playlistItemArtist);
+                playlistItem.appendChild(albumCover);
+            }
+        }
+        else{
+            return;
+        }
+    }
+
+}
+
+//only loads the playlist if the playlist page is opened
 function playlistLoad(){
     if(playlistBody != null){
         var userInput = JSON.parse(localStorage.getItem("userInput"));
@@ -136,6 +200,7 @@ function displayRecentSearches(){
     var lastElementCity = cityResults[cityResults.length -1];
     var resultsContainer = document.getElementById("results-container");
     var resultsElement = document.createElement("p");
+    resultsElement.setAttribute("class", "results-text");
     resultsElement.textContent = cityResults + ", " + lastElement;
     resultsContainer.appendChild(resultsElement);
 }
@@ -147,12 +212,13 @@ function renderRecentSearches(){
     var resultsContainer = document.getElementById("results-container");
     for(var i = 0; i < zipCodeArray.length; i++){
         var resultsElement = document.createElement("p");
+        resultsElement.setAttribute("class", "results-text");
         resultsElement.textContent = cityArray[i] + ", " + zipCodeArray[i];
         resultsContainer.appendChild(resultsElement);
     }
 }
 
-
+// returns a random integer between two given numbers
 function getRandomInteger(min, max){
     return Math.floor(Math.random() * (max - min) ) + min;
 }
@@ -180,6 +246,9 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
                     var albumCoverLink = randomSong.album.cover_small;
                     playlistTitle = randomSong.title_short;
                     playlistArtist = randomSong.artist.name;
+                    playlistTitleArray.push(playlistTitle);
+                    playlistArtistArray.push(playlistArtist);
+                    playlistAlbumCoverArray.push(albumCoverLink);
                     displayPlaylist(playlistTitle, playlistArtist, albumCoverLink);
                 });
             }
@@ -206,12 +275,14 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
                     var albumCoverLink = randomSong.album.cover_small;
                     playlistTitle = randomSong.title_short;
                     playlistArtist = randomSong.artist.name;
+                    playlistTitleArray.push(playlistTitle);
+                    playlistArtistArray.push(playlistArtist);
+                    playlistAlbumCoverArray.push(albumCoverLink);
                     displayPlaylist(playlistTitle, playlistArtist, albumCoverLink);
                 });
             });
         }
     }
-
 
     if(genreOneId != undefined && genreTwoId != undefined && genreThreeId != undefined){
         for(var i = 0; i < 10; i++){
@@ -233,12 +304,14 @@ function generatePlaylist(genreOneId, genreTwoId, genreThreeId){
                     var albumCoverLink = randomSong.album.cover_small;
                     playlistTitle = randomSong.title_short;
                     playlistArtist = randomSong.artist.name;
+                    playlistTitleArray.push(playlistTitle);
+                    playlistArtistArray.push(playlistArtist);
+                    playlistAlbumCoverArray.push(albumCoverLink);
                     displayPlaylist(playlistTitle, playlistArtist, albumCoverLink);
                 });
             });
         }
     }   
-
 }
 
 //Displays current weather from search
@@ -273,6 +346,7 @@ function displayWeather(data){
     console.log(data);
 }
 
+// displays the generated playlist
 function displayPlaylist(playlistTitle, playlistArtist, albumCoverLink){
     var playListUl = document.getElementById("playlist");
 
@@ -297,7 +371,6 @@ function displayPlaylist(playlistTitle, playlistArtist, albumCoverLink){
     playlistItem.appendChild(albumCover);
 }
 
-//generatePlaylist(152, 464, 106);
 
 // this function takes in the id of the weather conditions and then applies a music genre based off that id. 
 function getMusicType(weatherConditionId){
@@ -313,31 +386,32 @@ function getMusicType(weatherConditionId){
     const genreArray = [152, 464, 132, 116, 106, 84, 98, 113, 129, 153, 85, 169];
 
 
-    if(weatherConditionId === thunderstorm){
+    if(thunderstorm.includes(weatherConditionId)){
         generatePlaylist(genreArray[0], genreArray[1], genreArray[4]);
     }
-    if(weatherConditionId === drizzle){
+    if(drizzle.includes(weatherConditionId)){
         generatePlaylist(genreArray[8], genreArray[9]);
     }
-    if(weatherConditionId === rain){
+    if(rain.includes(weatherConditionId)){
         generatePlaylist(genreArray[6], genreArray[9]);
     }
-    if(weatherConditionId === clear){
+    if(clear.includes(weatherConditionId)){
         generatePlaylist(genreArray[2], genreArray[3]);
     }
-    if(weatherConditionId === atmosphere){
+    if(atmosphere.includes(weatherConditionId)){
         generatePlaylist(genreArray[10], genreArray[7]);
     }
-    if(weatherConditionId === snow){
+    if(snow.includes(weatherConditionId)){
         generatePlaylist(genreArray[6], genreArray[11]);
     }
-    if(weatherConditionId === clouds){
+    if(clouds.includes(weatherConditionId)){
         generatePlaylist(genreArray[10], genreArray[2]);
     }
-    else{
+    if(weatherConditionId === undefined){
         generatePlaylist(genreArray[2]);
     }
-
 }
+
 playlistLoad();
 renderRecentSearches();
+renderSavedPlaylist();

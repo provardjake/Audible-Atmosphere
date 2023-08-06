@@ -84,6 +84,9 @@ span {
 }
 /* target col 2 end */
 
+.results-text{
+  font-size: 175%;
+}
 
 footer {
   display: flex;
@@ -99,6 +102,10 @@ footer {
   width: 750px;
   height: auto;
 }
+
+/* #saved-playlist-container{
+  height: auto;
+} */
 
 #weather-box { /* Specific to playlist.html */
   width: 500px;
@@ -171,6 +178,10 @@ footer {
 @media screen and (max-width:890px) {
   #main-title {
     font-size: 30px;
+  }
+
+  .results-text{
+    font-size: 125%;
   }
 
   .playlist-item{
