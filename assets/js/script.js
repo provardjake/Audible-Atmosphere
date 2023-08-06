@@ -72,7 +72,7 @@ function getZipCode(userInput){
     var requestUrl = "http://api.openweathermap.org/geo/1.0/zip?zip="+userInput+",US&appid="+jakeAPIKeyOpenWeather;
     var cityLongitude;
     var cityLatitude;
-    console.log("hello");
+    // console.log("hello");
     fetch(requestUrl)
     .then(function(response){
         return response.json();
@@ -106,18 +106,39 @@ fetch(openWeatherRequestURL)
     searchCountry1 = JSON.parse(localStorage.getItem("countrySave") || "[]");
     searchCityZip1 = JSON.parse(localStorage.getItem("zipCode") || "[]");
 
-    searchLat1.push(searchLat);
-    searchLon1.push(searchLon);
-    searchCity1.push(searchCity);
-    searchCountry1.push(searchCountry);
-    searchCityZip1.push(cityZip);
-  
+    if (!localStorage.getItem('latitudeSave') && !localStorage.getItem('longitudeSave') && !localStorage.getItem('citySave') && !localStorage.getItem('countrySave') && !localStorage.getItem('zipCode')) {
+        localStorage.setItem("latitudeSave", "[]")
+        localStorage.setItem("longitudeSave", "[]")
+        localStorage.setItem("citySave", "[]")
+        localStorage.setItem("countrySave", "[]")
+        localStorage.setItem("zipCode", "[]")
+    }
+
+    if (!localStorage.getItem('latitudeSave').includes(searchLat)) {
+        searchLat1.push(searchLat);
+        localStorage.setItem("latitudeSave",JSON.stringify(searchLat1));
+    }
+
+    if (!localStorage.getItem('longitudeSave').includes(searchLon)) {
+        searchLon1.push(searchLon);
+        localStorage.setItem("longitudeSave",JSON.stringify(searchLon1));
+    }
+
+    if (!localStorage.getItem('citySave').includes(searchCity)) {
+        searchCity1.push(searchCity);
+        localStorage.setItem("citySave",JSON.stringify(searchCity1));
+    }
+
+    if (!localStorage.getItem('countrySave').includes(searchCountry)) {
+        searchCountry1.push(searchCountry);
+        localStorage.setItem("countrySave",JSON.stringify(searchCountry1));
+    }
+
+    if (!localStorage.getItem('zipCode').includes(cityZip)) {
+        searchCityZip1.push(cityZip);
+        localStorage.setItem("zipCode",JSON.stringify(searchCityZip1));
+    }
     
-    localStorage.setItem("latitudeSave",JSON.stringify(searchLat1));
-    localStorage.setItem("longitudeSave",JSON.stringify(searchLon1));
-    localStorage.setItem("citySave",JSON.stringify(searchCity1));
-    localStorage.setItem("countrySave",JSON.stringify(searchCountry1));
-    localStorage.setItem("zipCode",JSON.stringify(searchCityZip1));
     getMusicType(data.weather[0].id);
     displayWeather(data);
     displayRecentSearches();
@@ -135,7 +156,7 @@ function displayRecentSearches(){
 }
 
 function renderRecentSearches(){
-    var zipCodeArray = JSON.parse(localStorage.getItem("zipCode"));
+    var zipCodeArray = JSON.parse(localStorage.getItem("zipCode") || "[]");
     var resultsContainer = document.getElementById("results-container");
     for(var i = 0; i < zipCodeArray.length; i++){
         var resultsElement = document.createElement("p");
