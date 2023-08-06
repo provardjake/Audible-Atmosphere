@@ -96,12 +96,12 @@ footer {
 
 #playlist-box { /* Specific to playlist.html */
   margin-top: 10px;
-  width: 800px;
+  width: 750px;
   height: auto;
 }
 
 #weather-box { /* Specific to playlist.html */
-  width: 800px;
+  width: 500px;
   height: 300px;
 }
 
@@ -112,15 +112,16 @@ footer {
   align-items: center;
 }
 
-#current-temp{
+#current-temp {
   font-size: 500%;
 }
 
-#current-conditions{
+#current-conditions {
   font-size: 200%;
+  text-transform: capitalize;
 }
 
-.highlow-temp{
+.highlow-temp {
   text-align: center;
   display: inline-block;
   margin-left: 2%;
@@ -128,26 +129,42 @@ footer {
   font-size: 200%;
 }
 
-.playlist-item-container{
+.playlist-item-container {
   flex-direction: column;
   flex-wrap: wrap;
   height: auto;
   justify-content: left;
 }
 
-.playlist-item{
+.playlist-item {
   display: flex;
   font-size: 150%;
-  margin-top: 1%;
-  margin-bottom: 1%;;
+  margin-top: 1.5%;
+  margin-bottom: 1.5%;;
   flex-direction: row-reverse;
   justify-content: left;
 }
 
 .playlist-item-text{
-  display: inline-block;
+  display: flex;
+  flex-direction: column; 
+  text-align: start;
+  margin-left: 15px;
 }
 
+.song-title {
+  font-size: 30px;
+}
+
+.artist-name {
+  font-size: 20px;
+  font: italic;
+}
+
+.album-cover-picture {
+  width: 75px;
+  height: 75px;
+}
 
 
 /* Page responsiveness */
@@ -161,12 +178,29 @@ footer {
   }
 
   .album-cover-picture{
-    width: 48px;
-    height: auto;
+    max-width: 48px;
+    max-height: 48px;
   }
+
+  .song-title {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .artist-name {
+    font-size: 15px;
+  }
+  
 
   #current-temp{
     font-size: 300%;
+  }
+
+  .playlist-item-text{
+    display: flex;
+    flex-direction: column; 
+    text-align: start;
+    margin-left: 15;
   }
 
   #user-input {
@@ -184,31 +218,6 @@ footer {
     margin-top: 40px;
   }
 
-  .col-1, .col-3 {
-    min-height: 200px;
-    margin-bottom: 20px;
-    padding-top:0px;
-  }
-
-  .col-2 {
-    margin-top: 50px;
-    margin-bottom: 50px;
-  }
-
-  #side-column {
-    min-height: 200px;
-  }
-
-  .columns {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  #a{order:2;}
-  #b{order:1;}
-  #c{order:3;}
-
   #main-logo {
     width: 250px;
     height: 250px;
@@ -218,11 +227,12 @@ footer {
     margin-top: 10px;
     width: 500px;
     height: auto;
+
   }
   
   #weather-box { 
-    width: 500px;
-    height: 300px;
+    width: 350px;
+    height: 250px;
   }
 }
 
