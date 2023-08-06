@@ -4,88 +4,57 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Audible Atmosphere | Playlist</title>
+      <link rel="shortcut icon" type="image/PNG" href="./assets/images/favicon-16x16.png"/>
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link
         href="https://fonts.googleapis.com/css2?family=Agdasima&family=Josefin+Sans&family=Open+Sans:wght@300&family=Roboto:wght@400;700&display=swap"
         rel="stylesheet">
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-      <link rel="stylesheet" href="assets/css/style.css">
+      <link rel="stylesheet" href="./assets/css/style.css">
     </head>
-    <body>
+    <body id="playlist-body">
       <!-- ////////////////////////// Nav Bar /////////////////////////////////////// -->
       <nav class="navbar" role="navigation" aria-label="main navigation">
-          <div class="navbar-brand">
-            <a class="navbar-item" href="https://bulma.io">
-              <img src="./assets/images/AudibleAtmosphere.PNG" width=40px height=50px>
+        <div class="navbar-brand">
+          <a class="navbar-item" href="https://bulma.io">
+            <img src="./assets/images/AudibleAtmosphere.PNG" width="35px" height="50px">
+          </a>
+        </div>
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item">
+              Home
             </a>
-        
-            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-              <span aria-hidden="true"></span>
-              <span aria-hidden="true"></span>
-              <span aria-hidden="true"></span>
+            <a class="navbar-item">
+              GitHub Repo
             </a>
           </div>
-        
-          <div id="navbarBasicExample" class="navbar-menu">
-            <div class="navbar-start">
-              <a class="navbar-item">
-                Home
-              </a>
-        
-              <a class="navbar-item">
-                Documentation
-              </a>
-        
-              <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">
-                  More
-                </a>
-        
-                <div class="navbar-dropdown">
-                  <a class="navbar-item">
-                    About
-                  </a>
-                  <a class="navbar-item">
-                    Jobs
-                  </a>
-                  <a class="navbar-item">
-                    Contact
-                  </a>
-                  <hr class="navbar-divider">
-                  <a class="navbar-item">
-                    Report an issue
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+        </div>
+        </div>
       </nav>  
       <!-- ////////////////////////// End Nav Bar /////////////////////////////////// -->     
       
-      <main class="columns is-centered">
+      <main class="columns is-mobile" id="display-boxes">
           <div class="container">
             <div class="column" id="display-boxes">
             <!-- Box to display weather information -->
               <img src="./assets/images/AudibleAtmosphere.PNG" width=75px height=75px>
-              <h1 class="has-text-centered is-size-4">Current Weather in (location)</h1>
+              <h1 class="has-text-centered is-size-4" id="weather-location-text"></h1>
               <div class="box" id="weather-box">
-                <p>
-                  Weather information will be displayed here.
-                </p>
               </div>
               <h2 class="has-text-centered is-size-4">Here's your playlist!</h2>
+              <h3>Refresh the page to get a new playlist.</h3>
 
               <!-- User buttons -->
               <div class="container has-text-centered">               
-                <button class="button" type="button">Go Back</button>
+                <button class="button" type="button" onclick="window.location.href='index.html'">Go Back</button>
                 <button class="button" type="button">Save Playlist</button>
               </div>
 
               <!-- Box to display generated playlist -->
-              <div class="box col-1" id="playlist-box">
-                  <ul>
-                    Playlist information will be displayed here.
+              <div class="box" id="playlist-box">
+                  <ul id="playlist">
                   </ul>
               </div>
             </div>                
@@ -94,7 +63,7 @@
 
       <footer>
         <a class="navbar-item" href="https://bulma.io">
-          <img src="./assets/images/AudibleAtmosphere.PNG" width=40px height=50px>
+          <img src="./assets/images/AudibleAtmosphere.PNG" width=35px height=50px>
         </a>
         <a class="navbar-item">
           Home
@@ -104,6 +73,6 @@
         </a>
       </footer>
 
-      <script src="assets/js/script.js"></script>
+      <script src="./assets/js/script.js"></script>
     </body>
 </html>

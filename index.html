@@ -1,97 +1,95 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Audible Atmosphere | Home</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Agdasima&family=Josefin+Sans&family=Open+Sans:wght@300&family=Roboto:wght@400;700&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
-  <!-- start navigation -->
-  <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="https://bulma.io">
-        <img src="./assets/images/AudibleAtmosphere.PNG" width="40px" height="50px">
-      </a>
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-    </div>
-    <div id="navbarBasicExample" class="navbar-menu">
-      <div class="navbar-start">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Audible Atmosphere | Home</title>
+      <link rel="shortcut icon" type="image/PNG" href="./assets/images/favicon-16x16.png"/>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Agdasima&family=Josefin+Sans&family=Open+Sans:wght@300&family=Roboto:wght@400;700&display=swap"
+        rel="stylesheet">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+      <link rel="stylesheet" href="./assets/css/style.css">
+    </head>
+  <body>    
+    <!-- start navigation -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="https://bulma.io">
+          <img src="./assets/images/AudibleAtmosphere.PNG" width="35px" height="50px">
+        </a>
+      </div>
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item">
+            Home
+          </a>
+          <a class="navbar-item">
+            GitHub Repo
+          </a>
+        </div>
+      </div>
+      </div>
+    </nav>
+    <!-- end nav -->
+    <main> 
+      <div class="main-content">
+        <!-- Start Columns -->
+        <!-- start col 1 -->
+        <div id="parent" class="columns is-mobile">
+          <div class="column col-1" id="a">
+            <div>
+              <div class="box side-column">
+                <h2>Saved Playlists</h2>
+              </div>
+            </div>
+          </div>
+          <!-- end col 1 -->
+          <!-- start col 2 -->
+          <div class="column col-2" id="b">
+            <div>
+              <img id="main-logo" src="./assets/images/AudibleAtmosphere.PNG">
+            </div>
+
+            <h1 id="main-title"><span>Audible </span>Atmosphere<span>.</span></h1>
+            <div>
+              <h2 id="slogan">Turn The Weather Into Music!</h2>
+            </div>
+            <p id="info-p">Generate a random music playlist based on the weather in your area.</p>
+            <div>
+              <input class="input" type="text" id="user-input" placeholder="Enter Zip Code">
+            </div>        
+            <button class="button" type="button" id="generate-button">Generate!</button>        
+            <div id="city-list" style="display: none;"></div>
+          </div>
+          <!-- end col 2 -->
+          <!-- start col 3 -->
+          <div class="column col-3" id="c">
+            <div>
+              <div class="box side-column" id="results-container">
+
+                <h2>Recent Locations</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end col 3 -->
+      <!-- End Columns -->
+      <footer>
+        <a class="navbar-item" href="https://bulma.io">
+          <img src="./assets/images/AudibleAtmosphere.PNG" width="35px" height="50px">
+        </a>
         <a class="navbar-item">
           Home
         </a>
         <a class="navbar-item">
           GitHub Repo
         </a>
-      </div>
-    </div>
-    </div>
-  </nav>
-  <!-- end nav -->
-  <div class="main-content">
-    <!-- Start Columns -->
-    <!-- start col 1 -->
-    <div id="parent" class="columns is-mobile">
-      <div class="column col-1" id="a">
-        <div>
-          <div class="box">
-            <h2>Saved Playlists</h2>
-          </div>
-        </div>
-      </div>
-      <!-- end col 1 -->
-      <!-- start col 2 -->
-      <div class="column col-2" id="b">
-        <div>
-          <img id="main-logo" src="./assets/images/AudibleAtmosphere.PNG">
-        </div>
-
-        <h1 id="main-title"><span>Audible </span>Atmosphere<span>.</span></h1>
-        <div>
-          <h2 id="slogan">Turn The Weather Into Music!</h2>
-        </div>
-        <p id="info-p">Generate a random music playlist based on the weather in your area.</p>
-        <div>
-          <input class="input" type="text" id="user-input" placeholder="Enter Zip Code">
-        </div>        
-        <button class="button" type="button" id="generate-button">Generate!</button>        
-        <div id="city-list" style="display: none;"></div>
-      </div>
-      <!-- end col 2 -->
-      <!-- start col 3 -->
-      <div class="column col-3" id="c">
-        <div>
-          <div class="box">
-            <h2>Recent Locations</h2>
-              <div id="resultsContainer"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- end col 3 -->
-  <!-- End Columns -->
-  <footer>
-    <a class="navbar-item" href="https://bulma.io">
-      <img src="./assets/images/AudibleAtmosphere.PNG" width="40px" height="50px">
-    </a>
-    <a class="navbar-item">
-      Home
-    </a>
-    <a class="navbar-item">
-      GitHub Repo
-    </a>
-  </footer>
-  <script src="assets/js/script.js"></script>
-</body>
+      </footer>
+    </main>
+    <script src="./assets/js/script.js"></script>
+  </body>
 </html>
