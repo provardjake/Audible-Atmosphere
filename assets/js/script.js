@@ -32,6 +32,7 @@ function savePlaylist(){
     var savedTitleArray = JSON.parse(localStorage.getItem("playlistTitle") || "[]");
     var savedArtistArray = JSON.parse(localStorage.getItem("playlistArtist") || "[]");
 
+
     savedTitleArray = playlistTitleArray;
     savedArtistArray = playlistArtistArray;
 
@@ -39,6 +40,12 @@ function savePlaylist(){
     localStorage.setItem("playlistArtist", JSON.stringify(savedArtistArray));
 
 
+    renderSavedPlaylist();
+}
+
+function renderSavedPlaylist(){
+    var savedPlaylistContainer = document.getElementById("saved-playlists-container");
+    
 }
 
 function playlistLoad(){
