@@ -136,7 +136,7 @@ function getCityName(userInput){
     
 //get the latitude and longitude using the zip code input.
 function getZipCode(userInput){
-    var requestUrl = openweatherRequestURLPrefix+"http://api.openweathermap.org/geo/1.0/zip?zip="+userInput+",US&appid="+jakeAPIKeyOpenWeather;
+    var requestUrl = "http://api.openweathermap.org/geo/1.0/zip?zip="+userInput+",US&appid="+jakeAPIKeyOpenWeather;
     var cityLongitude;
     var cityLatitude;
     console.log("hello");
