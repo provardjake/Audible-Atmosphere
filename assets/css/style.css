@@ -25,23 +25,23 @@ body {
 
 /* all columns */
 .columns {
-  min-height: 100%;
   text-align: center;
 }
 
 .side-column { /* Specific to index.html */
-  min-height: 92vh;
+  min-height: 120vh;
 }
+
 
 h2 {
   font-size: 20px;
 }
 
 .col-1, .col-3 {
-  min-height: 100vh;
   padding-left: 30px;
   padding-right: 30px;
-  padding-top: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 /* all columns end */
 
@@ -49,7 +49,7 @@ h2 {
 
 /* target col 2 start*/
 .col-2 {
-  margin-top: 120px;
+  margin-top: 20px;
 }
 
 #main-title {
@@ -102,10 +102,6 @@ footer {
   width: 750px;
   height: auto;
 }
-
-/* #saved-playlist-container{
-  height: auto;
-} */
 
 #weather-box { /* Specific to playlist.html */
   width: 500px;
@@ -175,6 +171,28 @@ footer {
 
 
 /* Page responsiveness */
+
+@media screen and (max-width:1330px) {
+  #parent {
+    display: block;
+  } 
+  #parent { display: flex; flex-direction: column; }
+  #a { order: 3; }
+  #b { order: 1; }
+  #c { order: 2; }
+
+  .side-column { /* Specific to index.html */
+    min-height: 10vh;
+  }
+  #main-logo {
+    height: 300px;
+  }
+
+.input {
+  width: 500px
+}
+}
+
 @media screen and (max-width:890px) {
   #main-title {
     font-size: 30px;
