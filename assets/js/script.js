@@ -2,6 +2,7 @@ var requestLatLong = 'http://api.openweathermap.org/geo/1.0/direct?q=Sandy,UT,&l
 var requestWeatherUrl = 'https://api.openweathermap.org/data/2.5/weather?lat=38.0142&lon=84.6165&appid=6314948569672463577f027ffc3ab6b1';
 var jakeAPIKeyOpenWeather = "0ba3133cb694a7de240bc9e5f4fceed2";
 var deezerRequestURLPrefix = "https://cors.iamnd.eu.org/?url=";
+var openweatherRequestURLPrefix = "https://cors-anywhere.herokuapp.com/";
 var searchButton = document.querySelector("#generate-button");
 var cityList = document.querySelector("#city-list");
 var citySearch = [];
@@ -135,7 +136,7 @@ function getCityName(userInput){
     
 //get the latitude and longitude using the zip code input.
 function getZipCode(userInput){
-    var requestUrl = "http://api.openweathermap.org/geo/1.0/zip?zip="+userInput+",US&appid="+jakeAPIKeyOpenWeather;
+    var requestUrl = openweatherRequestURLPrefix+"http://api.openweathermap.org/geo/1.0/zip?zip="+userInput+",US&appid="+jakeAPIKeyOpenWeather;
     var cityLongitude;
     var cityLatitude;
     console.log("hello");
