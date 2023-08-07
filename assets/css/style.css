@@ -193,12 +193,6 @@ footer {
 }
 }
 
-@media screen and (min-width: 890px) {
-  .side-column { /* Specific to index.html */
-    /* min-height: 120vh; */
-  }
-}
-
 @media screen and (max-width:890px) {
   #main-title {
     font-size: 30px;
